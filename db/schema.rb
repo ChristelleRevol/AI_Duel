@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_17_140806) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_17_144206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "battles", force: :cascade do |t|
+    t.string "category"
+    t.boolean "status"
+    t.string "winner"
+    t.date "end_date"
+    t.bigint "prompt_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prompt_id"], name: "index_battles_on_prompt_id"
+    t.index ["user_id"], name: "index_battles_on_user_id"
+  end
+
+  create_table "prompts", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer "votes"
+    t.string "model"
+    t.bigint "battle_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battle_id"], name: "index_responses_on_battle_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +50,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_140806) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pseudo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "battles", "prompts"
+  add_foreign_key "battles", "users"
+  add_foreign_key "responses", "battles"
 end
