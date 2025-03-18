@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :battles, only: %i[index show new create] do
+    collection do
+      get :index_ongoing
+    end
     resources :votes, only: %i[create]
   end
   resources :responses, only: %i[create]
