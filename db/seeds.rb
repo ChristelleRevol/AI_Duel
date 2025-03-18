@@ -17,35 +17,37 @@ Vote.destroy_all
 Response.destroy_all
 Battle.destroy_all
 User.destroy_all
+
 puts "Creating users..."
-5.times do
+20.times do
   User.create(
     email: Faker::Internet.email,
     pseudo: Faker::Internet.username,
     password: "123456"
   )
 end
+
 puts "Creating battles..."
-User.first(3).each do |user|
+User.first(5).each do |user|
   Battle.create(
     category: categories.sample,
-    prompt: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
+    prompt: Faker::Lorem.paragraph(sentence_count: rand(5..10)),
     end_date: Faker::Date.between(from: 2.days.ago, to: 1.days.from_now),
     user: user
   )
-  # battle.winner = models.sample if battle.end_date < Date.today
-  # battle.save
 end
+
 puts "Creating responses..."
 Battle.all.each do |battle|
   3.times do |i|
     Response.create(
       model: models[i],
       battle: battle,
-      content: Faker::Lorem.paragraph(sentence_count: rand(5..10))
+      content: Faker::Lorem.paragraphs(number: rand(7..10)).join(" ")
     )
   end
 end
+
 puts "Creating votes..."
 Battle.all.each do |battle|
   User.all.each do |user|
@@ -56,9 +58,13 @@ Battle.all.each do |battle|
     )
   end
 end
-# puts "Updating winners..."
-# Battle.where('end_date > ?', Date.today).each do |battle|
-#   battle.update(winner: )
-# end
-puts "Finished!\n
+
+puts "Updating winners..."
+Battle.where('end_date < ?', Date.today).each do |battle|
+  best_response_id = battle.votes.group(:response_id).count.max_by { |_k, v| v }.first
+  battle.update(winner: Response.find(best_response_id).model)
+end
+
+puts "Finished! \
 Created #{User.count} users |#{Battle.count} battles | #{Response.count} responses | #{Vote.count} votes"
+puts "#{Battle.where.not(winner: '').count} battle(s) over"
