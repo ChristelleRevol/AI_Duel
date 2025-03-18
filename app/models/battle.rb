@@ -1,7 +1,6 @@
 class Battle < ApplicationRecord
-  belongs_to :prompt
   belongs_to :user
-  has_many :responses
+  has_many :responses, :votes
 
-  validates :category, :end_date, presence: true
+  validates :category, :end_date, :prompt, presence: true
 end

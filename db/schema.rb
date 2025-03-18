@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_17_144206) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_18_120345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,14 +23,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_144206) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "prompt"
     t.index ["prompt_id"], name: "index_battles_on_prompt_id"
     t.index ["user_id"], name: "index_battles_on_user_id"
-  end
-
-  create_table "prompts", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "responses", force: :cascade do |t|
@@ -39,6 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_144206) do
     t.bigint "battle_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content"
     t.index ["battle_id"], name: "index_responses_on_battle_id"
   end
 
@@ -55,7 +51,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_144206) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "battles", "prompts"
+  create_table "votes", force: :cascade do |t|
+    t.bigint "battle_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "response_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battle_id"], name: "index_votes_on_battle_id"
+    t.index ["response_id"], name: "index_votes_on_response_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "battles", "users"
   add_foreign_key "responses", "battles"
+  add_foreign_key "votes", "battles"
+  add_foreign_key "votes", "responses"
+  add_foreign_key "votes", "users"
 end
