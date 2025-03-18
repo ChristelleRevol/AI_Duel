@@ -5,7 +5,6 @@ class CreateBattles < ActiveRecord::Migration[7.1]
       t.boolean :status
       t.string :winner
       t.date :end_date
-      t.references :prompt, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

@@ -19,12 +19,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_120345) do
     t.boolean "status"
     t.string "winner"
     t.date "end_date"
-    t.bigint "prompt_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "prompt"
-    t.index ["prompt_id"], name: "index_battles_on_prompt_id"
     t.index ["user_id"], name: "index_battles_on_user_id"
   end
 
