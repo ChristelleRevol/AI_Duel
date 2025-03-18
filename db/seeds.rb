@@ -10,37 +10,55 @@
 require 'faker'
 
 categories = ["research", "image generation", "content generation", "discussion", "mathematics"]
+models = ["GPT", "Claude", "Gemini"]
 
 puts "Cleaning DB..."
-User.destroy_all
-Battle.destroy_all
 Vote.destroy_all
+Response.destroy_all
+Battle.destroy_all
+User.destroy_all
 puts "Creating users..."
-User.create(
-  email: Faker::Internet.email,
-  pseudo: Faker::Internet.username,
-  password: "123456"
-)
+5.times do
+  User.create(
+    email: Faker::Internet.email,
+    pseudo: Faker::Internet.username,
+    password: "123456"
+  )
+end
 puts "Creating battles..."
-Battle.create(
-  category: categories.sample,
-  content_prompt: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
-  status: Faker::Boolean.boolean(true_ratio: 0.2),
-  end_date: Faker::Date.between(from: 2.days.ago, to: 1.days.from_now),
-  winner: "",
-  user: ""
-)
-puts "Creating votes..."
-Vote.create(
-  user: "",
-  battle: "",
-  response: ""
-)
+User.first(3).each do |user|
+  Battle.create(
+    category: categories.sample,
+    prompt: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
+    end_date: Faker::Date.between(from: 2.days.ago, to: 1.days.from_now),
+    user: user
+  )
+  # battle.winner = models.sample if battle.end_date < Date.today
+  # battle.save
+end
 puts "Creating responses..."
-Response.create(
-  model: "",
-  battle: "",
-  content: Faker::Lorem.paragraph(sentence_count: rand(5..10))
-)
+Battle.all.each do |battle|
+  3.times do |i|
+    Response.create(
+      model: models[i],
+      battle: battle,
+      content: Faker::Lorem.paragraph(sentence_count: rand(5..10))
+    )
+  end
+end
+puts "Creating votes..."
+Battle.all.each do |battle|
+  User.all.each do |user|
+    Vote.create(
+      user: user,
+      battle: battle,
+      response: battle.responses.sample
+    )
+  end
+end
+# puts "Updating winners..."
+# Battle.where('end_date > ?', Date.today).each do |battle|
+#   battle.update(winner: )
+# end
 puts "Finished!\n
 Created #{User.count} users |#{Battle.count} battles | #{Response.count} responses | #{Vote.count} votes"
