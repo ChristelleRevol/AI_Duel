@@ -12,7 +12,7 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-    @responses = Response.where(battle: @battle)
+    @responses = @battle.responses
   end
 
   def new

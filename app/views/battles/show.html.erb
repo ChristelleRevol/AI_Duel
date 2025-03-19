@@ -9,7 +9,11 @@
     <p><%= response.content %></p>
 
     <div>
-        <%= button_to "Vote", battle_votes_path(@battle), method: :post %>
+        <%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post %>
     </div>
+
+  <%= response.votes.count %>
+
   <% end %>
+
 </div>
