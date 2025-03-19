@@ -18,7 +18,14 @@ class BattlesController < ApplicationController
   end
 
   def create
-    raise
+    @battle = Battle.new(battle_params)
+    @battle.user = current_user
+    if @battle.save!
+      flash[:notice] = "Battle successfully created"
+      redirect_to battle_path(@battle)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
