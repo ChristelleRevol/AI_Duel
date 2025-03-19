@@ -20,6 +20,8 @@ class BattlesController < ApplicationController
   end
 
   def show
+    @battle = Battle.find(params[:id])
+    @responses = @battle.responses
   end
 
   def new
