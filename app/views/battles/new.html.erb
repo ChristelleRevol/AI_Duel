@@ -1,4 +1,16 @@
-<h1>C'EST LE NEW IZIIII</h1>
-<p>Est-ce que c'est toi John Wayne ou est-ce que c'est moi ?</p>
+<div class="container">
+  <h1>New Battle begin</h1>
 
-<%= image_tag "https://www.tuxboard.com/wp-content/uploads/2021/05/image-7.png" %>
+  <%= simple_form_for @battle do |f| %>
+    <div class="d-flex">
+      <%= f.input :category, as: :radio_buttons, collection: ["research", "image generation", "content generation", "discussion", "mathematics"] %>
+      <%= f.input :end_date, as: :string,
+        input_html: {
+          data: { controller: "datepicker" },
+          placeholder: Date.today + 1
+          } %>
+    </div>
+    <%= f.input :prompt, label: 'Enter your prompt here' %>
+    <%= f.button :submit, 'Battle now !', class: 'btn btn-primary' %>
+  <% end %>
+</div>

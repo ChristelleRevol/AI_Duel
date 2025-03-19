@@ -14,5 +14,16 @@ class BattlesController < ApplicationController
   end
 
   def new
+    @battle = Battle.new
+  end
+
+  def create
+    raise
+  end
+
+  private
+
+  def battle_params
+    params.require(:battle).permit(:category, :end_date, :prompt)
   end
 end
