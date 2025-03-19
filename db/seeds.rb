@@ -31,7 +31,7 @@ puts "Creating battles..."
 User.first(5).each do |user|
   Battle.create(
     category: categories.sample,
-    prompt: Faker::Lorem.paragraph(sentence_count: rand(5..10)),
+    prompt: Faker::Lorem.paragraphs(number: rand(3..5)).join(" "),
     end_date: Faker::Date.between(from: 2.days.ago, to: 1.days.from_now),
     user: user
   )
@@ -39,11 +39,11 @@ end
 
 puts "Creating responses..."
 Battle.all.each do |battle|
-  3.times do |i|
+  models.each do |model|
     Response.create(
-      model: models[i],
+      model: model,
       battle: battle,
-      content: Faker::Lorem.paragraphs(number: rand(7..10)).join(" ")
+      content: Faker::Lorem.paragraphs(number: rand(15..20)).join(" ")
     )
   end
 end
