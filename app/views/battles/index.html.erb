@@ -1,4 +1,50 @@
 <h1>C'EST L'INDEX T'AS CAPTé</h1>
-<p>On laisse pas bébé dans un coin.</p>
 
-<%= image_tag "https://www.bibamagazine.fr/wp-content/uploads/biba/2020/05/traduction-492x333.jpg" %>
+<!-- avec un select -->
+<div class="card-row">
+  <%= form_with url: battles_path, method: :get do |form| %>
+  <%= form.select :category,
+      Battle.select(:category).distinct.order(:category).pluck(:category, :category),
+      { prompt: "Select a category" },
+      { class: "form-control", data: { controller: "tom-select" }, selected: params[:category] || [], onchange: "this.form.submit()" } %>
+  <% end  %>
+</div>
+<!-- avec un select -->
+
+<!-- avec checkbox -->
+<div class="card-row">
+<%= form_with url: battles_path, method: :get do |form| %>
+  <ul class="list-group" id="items-list">
+    <li class="list-group-item">
+      <%= form.label :category, "Select a category" %>
+      <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
+        <div class="form-check">
+          <%= check_box_tag "category[]", category, params[:category]&.include?(category), class: "form-check-input", onchange: "this.form.submit()" %>
+          <%= label_tag "category_#{category}", category, class: "form-check-label" %>
+        </div>
+      <% end %>
+    </li>
+  </ul>
+  <% end %>
+</div>
+<!-- fin checkbox -->
+
+<div class="card-row">
+  <% if @battles.any? %>
+    <% @battles.each do |battle| %>
+      <% status = battle.winner ? "Closed" : "In Progress"  %>
+        <div class="prompt-card">
+          <div class="prompt"><%= link_to battle.prompt, battle_path(battle) %></div>
+          <div class="category"><%= battle.category %></div>
+          <div class="pseudo"><%= battle.user.pseudo %></div>
+          <div class="status">
+            <%= status %>
+          </div>
+        </div>
+    <% end  %>
+  <% else %>
+    <div class="prompt-card">
+      <p>Aucune bataille en cours.</p>
+    </div>
+  <% end %>
+</div>
