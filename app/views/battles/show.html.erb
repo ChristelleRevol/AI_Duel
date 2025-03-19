@@ -1,0 +1,15 @@
+<div>
+<h2>Prompt</h2>
+  <%= @battle.prompt %>
+</div>
+
+<div>
+  <% @responses.each do |response| %>
+    <h4><%= response.model %></h4>
+    <p><%= response.content %></p>
+
+    <div>
+        <%= button_to "Vote", battle_votes_path(@battle), method: :post %>
+    </div>
+  <% end %>
+</div>

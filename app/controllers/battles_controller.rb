@@ -9,6 +9,8 @@ class BattlesController < ApplicationController
   end
 
   def show
+    @battle = Battle.find(params[:id])
+    @responses = Response.where(battle: @battle)
   end
 
   def new
