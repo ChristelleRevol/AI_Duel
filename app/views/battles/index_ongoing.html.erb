@@ -1,4 +1,24 @@
 <h1>C'EST L'ONGOING Battle MA GUEULE</h1>
-<p>Je vois des gens qui sont morts</p>
 
-<%= image_tag "https://cdn-images-1.medium.com/fit/t/1600/480/1*tjYbyfbDWr248KfT1ZUFHw.jpeg" %>
+<div class="card-row">
+  <% if @battles.any? %>
+  <% @battles.each do |battle| %>
+    <% status = battle.winner ? "Closed" : "In Progress"  %>
+      <div class="prompt-card">
+        <div class="prompt"><%= battle.prompt %></div>
+        <div class="category"><%= battle.category %></div>
+        <div class="pseudo"><%= battle.user.pseudo %></div>
+        <div class="status">
+          <%= status %>
+        </div>
+      </div>
+    <% end  %>
+  <% else %>
+    <div class="prompt-card">
+      <p>Aucune bataille en cours.</p>
+    </div>
+  <% end %>
+</div>
+<div class="card-row">
+  <%= link_to "Login", new_user_session_path, class: "btn-login" %>
+</div>
