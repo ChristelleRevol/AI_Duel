@@ -23,6 +23,8 @@ class BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     @claude_response = @battle.claude_response
     @responses = @battle.responses
+
+    @ranking = @responses.sort_by { |response| -response.votes.count }.map(&:model)
   end
 
   def new
