@@ -1,33 +1,56 @@
 <h1>C'EST L'INDEX T'AS CAPTé</h1>
 
-<!-- avec un select -->
-<div class="card-row">
-  <%= form_with url: battles_path, method: :get do |form| %>
-  <%= form.select :category,
-      Battle.select(:category).distinct.order(:category).pluck(:category, :category),
-      { prompt: "Select a category" },
-      { class: "form-control", data: { controller: "tom-select" }, selected: params[:category] || [], onchange: "this.form.submit()" } %>
-  <% end  %>
-</div>
-<!-- avec un select -->
-
-<!-- avec checkbox -->
+<!-- Début filter -->
 <div class="card-row">
 <%= form_with url: battles_path, method: :get do |form| %>
+<!-- liste pour le status -->
   <ul class="list-group" id="items-list">
     <li class="list-group-item">
-      <%= form.label :category, "Select a category" %>
-      <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
+      <!-- Radio pour "Toutes les battles" (aucun filtre) -->
+      <div class="form-check">
+        <%= radio_button_tag "status", "", params[:status].blank?, class: "form-check-input", onchange: "this.form.submit()" %>
+        <%= label_tag "winner_all", "All", class: "form-check-label" %>
+      </div>
+      <!-- Radio pour "In Progress" (winner NULL) -->
+      <div class="form-check">
+        <%= radio_button_tag "status", "nil", params[:status] == "nil", class: "form-check-input", onchange: "this.form.submit()" %>
+        <%= label_tag "winner_in_progress", "In Progress", class: "form-check-label" %>
+      </div>
+      <!-- Radio pour "Finished" (winner NOT NULL) -->
+      <div class="form-check">
+        <%= radio_button_tag "status", "not_nil", params[:status] == "not_nil", class: "form-check-input", onchange: "this.form.submit()" %>
+        <%= label_tag "winner_finished", "Finished", class: "form-check-label" %>
+      </div>
+    </li>
+  </ul>
+<!-- fin liste pour le status -->
+<!-- liste pour la category -->
+  <ul class="list-group" id="items-list">
+    <li class="list-group-item">
+        <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
+          <div class="form-check">
+            <%= check_box_tag "category[]", category, params[:category]&.include?(category), class: "form-check-input", onchange: "this.form.submit()" %>
+            <%= label_tag "category_#{category}", category, class: "form-check-label" %>
+          </div>
+        <% end %>
+    </li>
+  </ul>
+<!-- fin liste pour la category -->
+<!-- liste pour le status -->
+  <ul class="list-group" id="items-list">
+    <li class="list-group-item">
+      <% Battle.where.not(winner: nil).select(:winner).distinct.order(:winner).pluck(:winner).each do |winner| %>
         <div class="form-check">
-          <%= check_box_tag "category[]", category, params[:category]&.include?(category), class: "form-check-input", onchange: "this.form.submit()" %>
-          <%= label_tag "category_#{category}", category, class: "form-check-label" %>
+          <%= check_box_tag "winner[]", winner, params[:winner]&.include?(winner), class: "form-check-input", onchange: "this.form.submit()" %>
+          <%= label_tag "winner_#{winner}", winner, class: "form-check-label" %>
         </div>
       <% end %>
     </li>
   </ul>
+<!-- fin liste pour le status -->
   <% end %>
 </div>
-<!-- fin checkbox -->
+<!-- fin filter -->
 
 <div class="card-row">
   <% if @battles.any? %>
@@ -39,6 +62,7 @@
           <div class="pseudo"><%= battle.user.pseudo %></div>
           <div class="status">
             <%= status %>
+            <%= battle.winner %>
           </div>
         </div>
     <% end  %>
