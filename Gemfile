@@ -50,6 +50,9 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+gem 'httparty'
+gem 'redcarpet'
+gem 'mistral_rb'
 
 group :development, :test do
   gem "dotenv-rails"
@@ -76,3 +79,4 @@ end
 
 gem 'faker'
 gem 'anthropic'
+gem "ruby-openai"
