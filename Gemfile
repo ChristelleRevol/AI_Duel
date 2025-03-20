@@ -52,6 +52,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'httparty'
 gem 'redcarpet'
+gem 'mistral_rb'
 
 group :development, :test do
   gem "dotenv-rails"
