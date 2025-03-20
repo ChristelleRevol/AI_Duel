@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <%= simple_form_for battle do |f| %>
     <div class="d-flex justify-content-between">
-      <%= f.input :category, as: :radio_buttons, collection: ["research", "image generation", "content generation", "discussion", "mathematics"] %>
+      <%= f.input :category, as: :radio_buttons, collection: ["research", "image generation", "content generation", "discussion", "mathematics"]%>
       <%= f.input :end_date, as: :string,
         input_html: {
           data: { controller: "datepicker" },
