@@ -32,7 +32,7 @@ User.first(5).each do |user|
   Battle.create(
     category: categories.sample,
     prompt: Faker::Lorem.paragraphs(number: rand(3..5)).join(" "),
-    end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
+    end_date: Faker::Time.between_dates(from: Date.today - 1, to: Date.today + 2, period: :all),
     user: user
   )
 end
