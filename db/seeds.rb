@@ -10,7 +10,7 @@
 require 'faker'
 
 categories = ["research", "image generation", "content generation", "discussion", "mathematics"]
-models = ["GPT", "Claude", "Gemini"]
+models = ["OpenAI", "Claude", "Mistral"]
 
 puts "Cleaning DB..."
 Vote.destroy_all
