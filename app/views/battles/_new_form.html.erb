@@ -4,8 +4,8 @@
       <%= f.input :category, as: :radio_buttons, collection: ["research", "image generation", "content generation", "discussion", "mathematics"]%>
       <%= f.input :end_date, as: :string,
         input_html: {
-          data: { controller: "datepicker" },
-          placeholder: Date.today
+          data: { controller: "datepicker"},
+          placeholder: Date.today,
           } %>
     </div>
     <%= f.input :prompt, label: 'Enter your prompt here' %>
