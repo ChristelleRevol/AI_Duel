@@ -76,3 +76,4 @@ end
 
 gem 'faker'
 gem 'anthropic'
+gem "ruby-openai"
