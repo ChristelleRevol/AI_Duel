@@ -1,7 +1,6 @@
-<h1>C'EST L'INDEX T'AS CAPTé</h1>
-
+<h1 class="title-index"><%=@battles.any? ? "All battles" : "No battle in progress "%></h1>
 <!-- Début filter -->
-<div class="card-row">
+<div class="perfect-filter">
 <%= form_with url: battles_path, method: :get do |form| %>
 <!-- liste pour le status -->
   <ul class="list-group" id="items-list">
@@ -52,23 +51,20 @@
 </div>
 <!-- fin filter -->
 
-<div class="card-row">
-  <% if @battles.any? %>
-    <% @battles.each do |battle| %>
-      <% status = battle.winner ? "Closed" : "In Progress"  %>
-        <div class="prompt-card">
-          <div class="prompt"><%= link_to battle.prompt, battle_path(battle) %></div>
-          <div class="category"><%= battle.category %></div>
-          <div class="pseudo"><%= battle.user.pseudo %></div>
-          <div class="status">
-            <%= status %>
-            <%= battle.winner %>
+<div class="row-container">
+  <% @battles.each do |battle| %>
+    <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
+      <div class="prompt-card">
+        <div class="prompt-top"><p><%= battle.prompt %></p></div>
+
+          <div class="prompt-card-body">
+            <div class="category"><%= battle.category.capitalize %></div>
+              <div class="last-elements-card">
+                <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
+                <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+              </div>
           </div>
-        </div>
-    <% end  %>
-  <% else %>
-    <div class="prompt-card">
-      <p>Aucune bataille en cours.</p>
-    </div>
-  <% end %>
+      </div>
+      <% end %>
+    <% end %>
 </div>
