@@ -13,19 +13,26 @@
   width: 450px;
   height: 205px;
   border-radius: 10px;
-  background-color: lightgray;
-  box-shadow: 3px 2px 12px -5px #524d5ab3;
+  background-color: #282D43;
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.33);
   color: black;
+  transition: 0.3s ease;
+}
+
+.prompt-card:hover {
+  outline: 1px solid rgba(255,204,98,0.67);
+  box-shadow: 0px 0px 20px 2px rgba(255,204,98,0.67);
 }
 
 .prompt-top {
+  color: white;
   padding: 12px;
   height: 130px;
   overflow:hidden;
 }
 
 .prompt-card-body {
-  background-color: white;
+  background-color: #1B1F32;
   padding: 12px;
   border-radius: 0px 0px 10px 10px;
   height: 75px;
@@ -33,16 +40,19 @@
 
 .category {
   color: white;
-  background-color: gray;
+  background-color: #00ADAB;
   border-radius: 15px;
   width: fit-content;
   height: auto;
-  padding: 2px;
+  font-size: 12px;
+  padding: 1px 6px;
 }
 
 .last-elements-card {
   display: flex;
   justify-content: space-between;
+  color: #C1C1C1;
+  margin-top: 10px;
 }
 
 .perfect-filter{
@@ -59,8 +69,12 @@
   left: 14px;
 }
 
+.test-form {
+position: absolute;
+}
+
 .title-index {
-  color: rgb(63, 58, 58);
+  color: #C1C1C1;
   text-align: center;
   margin: 1rem;
 }
