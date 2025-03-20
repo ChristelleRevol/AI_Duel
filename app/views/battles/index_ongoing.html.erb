@@ -5,12 +5,12 @@
   <% @battles.each do |battle| %>
     <% status = battle.winner ? "Closed" : "In Progress"  %>
       <div class="prompt-card">
-        <div class="prompt"><%= battle.prompt %></div>
-        <div class="category"><%= battle.category %></div>
-        <div class="pseudo"><%= battle.user.pseudo %></div>
-        <div class="status">
-          <%= status %>
-        </div>
+        <div class="prompt"><p><%= battle.prompt %></div></p>
+
+          <div class="category"><%= battle.category.capitalize %></div>
+          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
+          <div class="status"><%= status %></div>
+
       </div>
     <% end  %>
   <% else %>
