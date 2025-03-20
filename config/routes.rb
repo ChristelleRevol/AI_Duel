@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     end
     resources :votes, only: %i[create]
   end
-  resources :responses, only: %i[create]
+  resources :responses, only: %i[index create]
+
+  get 'responses/stream_mistral', to: 'responses#stream_mistral'
 end

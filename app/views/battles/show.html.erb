@@ -1,3 +1,5 @@
+<h1>SSay la show</h1>
+
 <% if DateTime.now < @battle.end_date %>
 
   <div>
@@ -6,6 +8,7 @@
   </div>
 
   <div>
+
     <% @responses.each do |response| %>
       <h4><%= response.model %></h4>
       <p><%= response.content %></p>
