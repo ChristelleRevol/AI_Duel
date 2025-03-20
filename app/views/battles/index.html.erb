@@ -8,7 +8,7 @@
       <!-- Radio pour "Toutes les battles" (aucun filtre) -->
       <div class="form-check">
         <%= radio_button_tag "status", "", params[:status].blank?, class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_all", "All", class: "form-check-label" %>
+        <%= label_tag "winner_all", "All", class: "form-check-label test-form" %>
       </div>
       <!-- Radio pour "In Progress" (winner NULL) -->
       <div class="form-check">
