@@ -11,55 +11,31 @@ class Battle < ApplicationRecord
   end
 
   def claude_response
-    # set_claude_response if responses.find_by(model: "Claude").nil?
-    # responses.find_by(model: "Claude")
+    set_claude_response if responses.find_by(model: "Claude").nil?
+    responses.find_by(model: "Claude")
   end
 
   def openai_response
-    # set_openai_response if responses.find_by(model: "OpenAI").nil?
-    # responses.find_by(model: "OpenAI")
+    set_openai_response if responses.find_by(model: "OpenAI").nil?
+    responses.find_by(model: "OpenAI")
   end
 
   private
 
   def set_mistral_response
-    # content = HTTParty.post(
-    #   "https://api.mistral.ai/v1/chat/completions",
-    #   headers: {
-    #     "Content-Type" => "application/json",
-    #     "Accept" => "application/json",
-    #     "Authorization" => "Bearer #{ENV.fetch('MISTRAL_API_KEY') { raise 'Clé API manquante !' }}"
-    #   },
-    #   body: {
-    #     model: "mistral-large-latest",
-    #     messages: [{ role: "user", content: prompt }]
-    #   }.to_json
-    # )
-
-    # uri = URI("https://api.mistral.ai/v1/chat/completions")
-    # request = Net::HTTP::Post.new(uri)
-    # request["Content-Type"] = "application/json"
-    # request["Accept"] = "application/json"
-    # request["Authorization"] = "Bearer #{ENV.fetch('MISTRAL_API_KEY') { raise 'Clé API manquante !' }}"
-
-    # request.body = {
-    #   model: "mistral-large-latest",
-    #   messages: [{ role: "user", content: prompt }]
-    # }.to_json
-
-    # answer = content.parsed_response.dig("choices", 0, "message", "content")
-    # # answer = content.parsed_response["choices"][0]["message"]["content"]
-    # Response.create(model: "Mistral", content: answer, battle: self)
-
-    client = Mistral::Client.new
-
-    response = client.chat(
-      model: "mistral-large-latest",
-      messages: [{ role: "user", content: prompt }]
-    )
-
-    answer = response.dig("choices", 0, "message", "content")
-    Response.create(model: "Mistral", content: answer, battle: self)
+    content = HTTParty.post(
+      "https://api.mistral.ai/v1/chat/completions",
+      headers: {
+        "Content-Type" => "application/json",
+        "Accept" => "application/json",
+        "Authorization" => "Bearer #{ENV.fetch('MISTRAL_API_KEY') { raise 'Clé API manquante !' }}"
+      },
+      body: {
+        model: "mistral-large-latest",
+        messages: [{ role: "user", content: prompt }]
+      }.to_json
+    )['choices'][0]['message']['content']
+    Response.create!(model: "Mistral", content: content, battle: self)
   end
 
   def set_claude_response
