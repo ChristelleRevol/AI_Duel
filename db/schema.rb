@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_19_135416) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_20_152935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_19_135416) do
     t.string "category"
     t.boolean "status"
     t.string "winner"
-    t.date "end_date"
+    t.datetime "end_date"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

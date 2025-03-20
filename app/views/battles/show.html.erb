@@ -1,6 +1,7 @@
 <%# if DateTime.now < @battle.end_date %>
 <% if @battle.winner.nil? %>
 
+  <!-- Timer -->
   <% seconds_until_target_time = @battle.end_date.to_time.to_i - Time.now.to_i %>
 
   <%= content_tag(:h1, "", data: {

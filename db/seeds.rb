@@ -32,7 +32,7 @@ User.first(5).each do |user|
   Battle.create(
     category: categories.sample,
     prompt: Faker::Lorem.paragraphs(number: rand(3..5)).join(" "),
-    end_date: Faker::Date.between(from: 2.days.ago, to: 1.days.from_now),
+    end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
     user: user
   )
 end
@@ -60,7 +60,7 @@ Battle.all.each do |battle|
 end
 
 puts "Updating winners..."
-Battle.where('end_date < ?', Date.today).each do |battle|
+Battle.where('end_date < ?', DateTime.now).each do |battle|
   best_response_id = battle.votes.group(:response_id).count.max_by { |_k, v| v }.first
   battle.update(winner: Response.find(best_response_id).model)
 end

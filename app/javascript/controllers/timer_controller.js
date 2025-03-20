@@ -10,7 +10,6 @@ export default class extends Controller {
     this.secondsUntilEnd = this.timerTarget.dataset.secondsUntilEndValue
 
     const now = new Date().getTime()
-    // const now = new Date(now + this.secondsUntilEnd * 1000)
     this.endTime = new Date(now + this.secondsUntilEnd * 1000);
 
     this.timer = setInterval(this.timer.bind(this), 1000)
