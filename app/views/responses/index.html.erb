@@ -1,0 +1,13 @@
+<h2>Chat avec Mistral</h2>
+
+<%= form_with url: responses_stream_mistral_path, method: :get, local: true do |form| %>
+  <%= form.text_field :prompt, placeholder: "Pose ta question...", class: "form-control" %>
+  <%= form.submit "Envoyer", class: "btn btn-primary" %>
+<% end %>
+
+<div id="mistral-response">
+<% if @ai_response.present? %>
+  <h3>Réponse :</h3>
+  <%= markdown_to_html(@ai_response["choices"][0]["message"]["content"]) %>
+<% end %>
+</div>
