@@ -3,3 +3,36 @@
 <%= @mistral_response.model %>
 
 <%= @mistral_response.content %>
+<% if DateTime.now < @battle.end_date %>
+
+  <div>
+  <h2>Prompt</h2>
+    <%= @battle.prompt %>
+  </div>
+
+  <div>
+    <% @responses.each do |response| %>
+      <h4><%= response.model %></h4>
+      <p><%= response.content %></p>
+
+      <div>
+          <%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post %>
+      </div>
+
+    <%= response.votes.count %>
+
+    <% end %>
+
+  </div>
+
+<% else %>
+
+<h2>This battle is already over</h2>
+
+<%= button_to "Start a new one", new_battle_path, method: :get %>
+
+<p>Winner: <%= @ranking.first %></p>
+<p>Second: <%= @ranking[1] %></p>
+<p>Third: <%= @ranking.last %></p>
+
+<% end %>
