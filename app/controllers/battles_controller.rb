@@ -21,6 +21,7 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
+    @claude_response = @battle.claude_response
     @responses = @battle.responses
   end
 
