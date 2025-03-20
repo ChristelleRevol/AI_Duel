@@ -38,8 +38,15 @@
 
 <%= button_to "Start a new one", new_battle_path, method: :get %>
 
-<p>Winner: <%= @ranking.first %></p>
-<p>Second: <%= @ranking[1] %></p>
-<p>Third: <%= @ranking.last %></p>
+<p><%= @battle.prompt %></p>
+
+<% @battle.responses.each do |response| %>
+  <% if response.votes.count == @votes_count_ranking.first %>
+    <h4><p>winner: </p><%= response.model %></h4>
+  <% else %>
+    <h4><%= response.model %></h4>
+  <% end %>
+  <%= response.content %>
+<% end %>
 
 <% end %>
