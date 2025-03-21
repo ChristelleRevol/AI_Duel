@@ -1,9 +1,11 @@
 <h1 class="title-index"><%=@battles.any? ? "All battles" : "No battle in progress "%></h1>
+
+
 <!-- Début filter -->
 <div class="perfect-filter">
 <%= form_with url: battles_path, method: :get do |form| %>
 <!-- liste pour le status -->
-  <ul class="list-group" id="items-list">
+  <ul class="list-group" id="items-status">
     <li class="list-group-item">
       <!-- Radio pour "Toutes les battles" (aucun filtre) -->
       <div class="form-check">
@@ -24,7 +26,7 @@
   </ul>
 <!-- fin liste pour le status -->
 <!-- liste pour la category -->
-  <ul class="list-group" id="items-list">
+  <ul class="list-group" id="items-category">
     <li class="list-group-item">
         <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
           <div class="form-check">
@@ -36,7 +38,7 @@
   </ul>
 <!-- fin liste pour la category -->
 <!-- liste pour le status -->
-  <ul class="list-group" id="items-list">
+  <ul class="list-group" id="items-winner">
     <li class="list-group-item">
       <% Battle.where.not(winner: nil).select(:winner).distinct.order(:winner).pluck(:winner).each do |winner| %>
         <div class="form-check">
@@ -50,6 +52,11 @@
   <% end %>
 </div>
 <!-- fin filter -->
+
+
+
+
+
 
 <div class="row-container">
   <% @battles.each do |battle| %>

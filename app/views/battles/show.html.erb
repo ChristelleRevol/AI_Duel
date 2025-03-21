@@ -14,12 +14,11 @@
     seconds_until_end_value: seconds_until_target_time
   }) %></div>
 
-  <div class="row-container">
+  <div class="row-container-show">
     <% @responses.each do |response| %>
     <div class="response-card">
-        <h4><%#= response.model %></h4>
-          <p><%= response.content %></p>
-          <%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %>
+          <div><%= markdown_to_html(response.content) %></div>
+          <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
       <%#= response.votes.count %>
     </div>
     <% end %>
@@ -31,9 +30,7 @@
 
 <%= button_to "Start a new one", new_battle_path, method: :get, class: "start-button" %>
 
-<%# <p>Winner: </p> %>
-<%# <p>Second: </p> %>
-<%# <p>Third: </p> %>
+ <div class="user-prompt"><%= @battle.prompt %></div>
 
 <i class="fa-solid fa-trophy trophy"></i>
 
@@ -42,7 +39,16 @@
   <div class="podium-middle"><span><%= @ranking.first %></span></div>
   <div class="podium-right"><span><%= @ranking.last %></span></div>
 </div>
-<p><%= @battle.prompt %></p>
+
+<div class="row-container-show">
+    <% @responses.each do |response| %>
+    <div class="response-card">
+        <h4><%= response.model %></h4>
+          <%= markdown_to_html(response.content) %>
+      <%#= response.votes.count %>
+    </div>
+    <% end %>
+  </div>
 
 <%# @battle.responses.each do |response| %>
   <%# if response.votes.count == @votes_count_ranking.first %>
