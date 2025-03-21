@@ -21,9 +21,6 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-    @claude_response = @battle.claude_response
-    @openai_response = @battle.openai_response
-    @mistral_response = @battle.mistral_response
     @responses = @battle.responses
 
     @votes_count_ranking = @responses.map { |response| response.votes.count }.sort_by { |response| -response }
