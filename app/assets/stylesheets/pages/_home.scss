@@ -1,1 +1,55 @@
 // Specific CSS for your home-page
+body {
+  min-height: 100vh;
+  background-color: #393F5E;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-container {
+  width: 100%;
+  height: 90vh;
+  flex-direction: column;
+  background-color: #393F5E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#claim {
+  font-family: 'Fira Code', monospace;
+  padding-bottom: 40px;
+}
+
+#team {
+  font-family: 'Fira Code', monospace;
+  color: white;
+}
+
+.end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container h1 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+#anim {
+  margin: auto;
+  transition: 0.3s ease;
+}
+
+#anim:hover {
+  margin: auto;
+  outline: 1px solid rgba(255,204,98,0.67);
+  box-shadow: 0px 0px 20px 2px rgba(255,204,98,0.67);
+}
+
+.anim-link {
+  text-decoration: none;
+  display: inline-block;
+}
