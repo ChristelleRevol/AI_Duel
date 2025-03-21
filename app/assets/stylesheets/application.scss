@@ -11,3 +11,8 @@
 @import "components/index";
 @import "pages/index";
 @import "components/footer";
+
+.turbo-progress-bar {
+  background-color: rgba(255,204,98,0.67) !important;
+  height: 3px;
+}

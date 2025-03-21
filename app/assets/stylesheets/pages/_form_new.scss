@@ -1,0 +1,27 @@
+.container-form-new {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.row-1 {
+  display: flex;
+}
+
+.row-1-left {
+  display: flex;
+  width: 25%;
+  justify-content: center;
+}
+
+.form-category {
+background-color: #1B1F32;
+padding: 8px;
+border-radius: 10px;
+}
+
+.row-1-right {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
