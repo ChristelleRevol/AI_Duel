@@ -31,15 +31,15 @@
       </div>
 
       <% if user_signed_in? %>
-
+        <div>
           <span class="avatar-text"><%= current_user.pseudo %></span>
           <% if current_user.photo.attached?%>
             <%= cl_image_tag current_user.photo.key, class: 'avatar' %>
           <% else %>
             <%= image_tag "Default_avatar.jpg", class: 'avatar' %>
           <% end %>
-
+        </div>
       <% end %>
-    <%# </div> %>
+
   </div>
 </div>
