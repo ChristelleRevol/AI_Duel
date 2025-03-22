@@ -18,6 +18,10 @@ class AskMistralJob < ApplicationJob
     content = "blablabla"
     sleep(3)
     response = battle.responses.find_by(model: "Mistral")
-    response.update(content: content)
+    response.update(content: content) if response.content.nil?
+    Turbo::StreamsChannel.broadcast_update_to(
+      "response_#{@response.id}",
+      target: "response_#{@response.id}",
+      partial: "battles/response", locals: { response: response, battle: response.battle })
   end
 end

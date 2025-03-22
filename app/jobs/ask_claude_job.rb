@@ -1,7 +1,7 @@
 class AskClaudeJob < ApplicationJob
   queue_as :default
 
-  def perform(battle)
+  def perform(response)
     # client = Anthropic::Client.new
     # content = client.messages(
     #   parameters: {
@@ -10,9 +10,14 @@ class AskClaudeJob < ApplicationJob
     #     max_tokens: 1000
     #   }
     # )['content'][0]['text']
-    content = "blablabla"
+    @response = response
     sleep(3)
-    response = battle.responses.find_by(model: "Claude")
-    response.update(content: content)
+    content = "blablabla"
+    # @battle = battle
+    response.update(content: content) if response.content.nil?
+    Turbo::StreamsChannel.broadcast_update_to(
+      "response_#{@response.id}",
+      target: "response_#{@response.id}",
+      partial: "battles/response", locals: { response: response, battle: response.battle })
   end
 end

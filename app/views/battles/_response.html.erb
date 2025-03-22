@@ -1,0 +1,6 @@
+<div id="<%= dom_id(response) %>" class="response-card">
+  <%= turbo_stream_from dom_id(response) %>
+  <div><%= response.content || "..." %></div>
+  <div class="ftm"><%= button_to "Vote", battle_votes_path(battle, response_id: response.id), method: :post, class: "vote-button" %></div>
+  <%#= response.votes.count %>
+</div>

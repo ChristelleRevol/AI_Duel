@@ -83,3 +83,4 @@ gem 'faker'
 gem 'anthropic'
 gem "ruby-openai"
 gem 'solid_queue'
+gem 'solid_cable'

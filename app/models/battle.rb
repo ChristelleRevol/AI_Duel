@@ -5,7 +5,7 @@ class Battle < ApplicationRecord
 
   validates :category, :end_date, :prompt, presence: true
 
-  after_save :async_responses_call
+  after_save :create_responses, :async_responses_call
 
   private
 
@@ -16,7 +16,7 @@ class Battle < ApplicationRecord
   end
 
   def async_responses_call
-    AskClaudeJob.perform_later(self)
+    AskClaudeJob.perform_later(responses.find_by(model: "Claude"))
     AskOpenAiJob.perform_later(self)
     AskMistralJob.perform_later(self)
   end
