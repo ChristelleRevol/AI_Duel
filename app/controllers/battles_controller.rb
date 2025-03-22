@@ -35,7 +35,8 @@ class BattlesController < ApplicationController
   def create
     @battle = Battle.new(battle_params)
     @battle.user = current_user
-    if @battle.save!
+    if @battle.save
+      create_responses(@battle)
       flash[:notice] = "Battle successfully created"
       redirect_to battle_path(@battle)
     else
@@ -47,5 +48,11 @@ class BattlesController < ApplicationController
 
   def battle_params
     params.require(:battle).permit(:category, :end_date, :prompt)
+  end
+
+  def create_responses(battle)
+    Response.create(model: "Claude", battle: battle)
+    Response.create(model: "OpenAI", battle: battle)
+    Response.create(model: "Mistral", battle: battle)
   end
 end

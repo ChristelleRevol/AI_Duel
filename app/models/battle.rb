@@ -4,19 +4,12 @@ class Battle < ApplicationRecord
   has_many :votes
 
   validates :category, :end_date, :prompt, presence: true
-
-  after_save :create_responses, :async_responses_call
+  after_save :async_responses_call
 
   private
 
-  def create_responses
-    Response.create(model: "Claude", battle: self)
-    Response.create(model: "OpenAI", battle: self)
-    Response.create(model: "Mistral", battle: self)
-  end
-
   def async_responses_call
-    AskClaudeJob.perform_later(responses.find_by(model: "Claude"))
+    AskClaudeJob.perform_later(self)
     AskOpenAiJob.perform_later(self)
     AskMistralJob.perform_later(self)
   end

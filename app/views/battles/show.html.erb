@@ -16,7 +16,11 @@
 
   <div class="row-container-show">
     <% @responses.each do |response| %>
-      <%= render "response", response: response, battle: @battle %>
+      <div class="response-card">
+        <%= render "response", response: response %>
+        <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
+        <%#= response.votes.count %>
+      </div>
     <% end %>
   </div>
 
