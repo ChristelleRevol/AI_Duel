@@ -4,7 +4,7 @@ class AskMistralJob < ApplicationJob
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "Mistral")
     if response.content.nil?
-      content = api_response(battle.prompt)
+      content = api_response(battle)
       response.update(content: content)
     end
     broadcast(response, battle)
@@ -12,7 +12,7 @@ class AskMistralJob < ApplicationJob
 
   private
 
-  def api_response(prompt)
+  def api_response(battle)
     HTTParty.post(
       "https://api.mistral.ai/v1/chat/completions",
       headers: {
@@ -20,7 +20,11 @@ class AskMistralJob < ApplicationJob
         "Accept" => "application/json",
         "Authorization" => "Bearer #{ENV.fetch('MISTRAL_API_KEY') { raise 'Clé API manquante !' }}"
       },
-      body: { model: "mistral-large-latest", messages: [{ role: "user", content: prompt }] }.to_json
+      body: { model: "mistral-large-latest",
+              messages: [
+                { role: "system", content: "You're an expert in the following field: #{battle.category}" },
+                { role: "user", content: battle.prompt }
+              ] }.to_json
     )['choices'][0]['message']['content']
   end
 

@@ -4,7 +4,7 @@ class AskClaudeJob < ApplicationJob
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "Claude")
     if response.content.nil?
-      content = api_response(battle.prompt)
+      content = api_response(battle)
       response.update(content: content)
     end
     broadcast(response, battle)
@@ -12,12 +12,13 @@ class AskClaudeJob < ApplicationJob
 
   private
 
-  def api_response(prompt)
+  def api_response(battle)
     client = Anthropic::Client.new
     client.messages(
       parameters: {
         model: "claude-3-haiku-20240307",
-        messages: [{ role: "user", content: prompt }],
+        system: "You're an expert in the following field: #{battle.category}",
+        messages: [{ role: "user", content: battle.prompt }],
         max_tokens: 1000
       }
     )['content'][0]['text']

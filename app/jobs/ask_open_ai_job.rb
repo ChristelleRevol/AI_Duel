@@ -4,7 +4,7 @@ class AskOpenAiJob < ApplicationJob
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "OpenAI")
     if response.content.nil?
-      content = api_response(battle.prompt)
+      content = api_response(battle)
       response.update(content: content)
     end
     broadcast(response, battle)
@@ -12,12 +12,15 @@ class AskOpenAiJob < ApplicationJob
 
   private
 
-  def api_response(prompt)
+  def api_response(battle)
     client = OpenAI::Client.new
     client.chat(
       parameters: {
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }]
+        messages: [
+          { role: "system", content: "You're an expert in the following field: #{battle.category}" },
+          { role: "user", content: battle.prompt }
+        ]
       }
     )["choices"][0]["message"]["content"]
   end
