@@ -31,7 +31,7 @@ class Battle < ApplicationRecord
         "Authorization" => "Bearer #{ENV.fetch('MISTRAL_API_KEY') { raise 'Clé API manquante !' }}"
       },
       body: {
-        model: "mistral-large-latest",
+        model: "mistral-small",
         messages: [{ role: "user", content: prompt }]
       }.to_json
     )['choices'][0]['message']['content']
