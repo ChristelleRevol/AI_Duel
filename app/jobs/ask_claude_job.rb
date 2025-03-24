@@ -4,8 +4,10 @@ class AskClaudeJob < ApplicationJob
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "Claude")
     if response.content.nil?
-      content = api_response(battle)
+      content = api_response(battle)['content'][0]['text']
+      token = api_response(battle)['usage']['input_tokens'] + api_response(battle)['usage']['output_tokens']
       response.update(content: content)
+      response.update(token: token)
     end
     broadcast(response, battle)
   end
@@ -21,7 +23,7 @@ class AskClaudeJob < ApplicationJob
         messages: [{ role: "user", content: battle.prompt }],
         max_tokens: 1000
       }
-    )['content'][0]['text']
+    )
   end
 
   def broadcast(response, battle)

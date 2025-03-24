@@ -17,46 +17,52 @@
   <div class="row-container-show">
     <% @responses.shuffle.each do |response| %>
       <div class="response-card">
-        <%= render "response", response: response %>
-        <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
-        <%#= response.votes.count %>
+        <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
+          <%= image_tag "error_529" %>
+        <% else %>
+          <%= render "response", response: response %>
+          <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
+        <% end %>
       </div>
     <% end %>
   </div>
 
 <% else %>
 
-<h1 class="title-index">This battle is already over</h1>
+  <h1 class="title-index">This battle is already over</h1>
 
-<%= button_to "Start a new one", new_battle_path, method: :get, class: "start-button" %>
+  <%= button_to "Start a new one", new_battle_path, method: :get, class: "start-button" %>
 
- <div class="user-prompt"><%= @battle.prompt %></div>
+  <div class="user-prompt"><%= @battle.prompt %></div>
 
-<i class="fa-solid fa-trophy trophy"></i>
+  <i class="fa-solid fa-trophy trophy"></i>
 
-<div class="podium">
-  <div class="podium-left"><span><%= @ranking[1] %></span></div>
-  <div class="podium-middle"><span><%= @ranking.first %></span></div>
-  <div class="podium-right"><span><%= @ranking.last %></span></div>
-</div>
-
-<div class="row-container-show">
-    <% @responses.each do |response| %>
-    <div class="response-card">
-        <h4><%= response.model %></h4>
-          <%= markdown_to_html(response.content) %>
-      <%#= response.votes.count %>
-    </div>
-    <% end %>
+  <div class="podium">
+    <div class="podium-left"><span><%= @ranking[1] %></span></div>
+    <div class="podium-middle"><span><%= @ranking.first %></span></div>
+    <div class="podium-right"><span><%= @ranking.last %></span></div>
   </div>
 
-<%# @battle.responses.each do |response| %>
-  <%# if response.votes.count == @votes_count_ranking.first %>
-    <%# <h4><p>winner: </p><%= response.model</h4> %>
-  <%# else %>
-    <%# <h4><%= response.model</h4> %>
+  <div class="row-container-show">
+      <% @responses.each do |response| %>
+        <div class="response-card">
+          <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
+            <%= image_tag "error_529" %>
+          <% else %>
+            <h4><%= response.model %></h4>
+              <%= markdown_to_html(response.content) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  <%# @battle.responses.each do |response| %>
+    <%# if response.votes.count == @votes_count_ranking.first %>
+      <%# <h4><p>winner: </p><%= response.model</h4> %>
+    <%# else %>
+      <%# <h4><%= response.model</h4> %>
+    <%# end %>
+    <%#= response.content %>
   <%# end %>
-  <%#= response.content %>
-<%# end %>
 
 <% end %>

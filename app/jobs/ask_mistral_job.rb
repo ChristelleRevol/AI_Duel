@@ -4,8 +4,10 @@ class AskMistralJob < ApplicationJob
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "Mistral")
     if response.content.nil?
-      content = api_response(battle)
+      content = api_response(battle)['choices'][0]['message']['content']
+      token = api_response(battle)['usage']['total_tokens']
       response.update(content: content)
+      response.update(token: token)
     end
     broadcast(response, battle)
   end
@@ -25,7 +27,7 @@ class AskMistralJob < ApplicationJob
                 { role: "system", content: "You're an expert in the following field: #{battle.category}" },
                 { role: "user", content: battle.prompt }
               ] }.to_json
-    )['choices'][0]['message']['content']
+    )
   end
 
   def broadcast(response, battle)
