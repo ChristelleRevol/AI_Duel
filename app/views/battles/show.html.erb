@@ -16,14 +16,19 @@
 
   <div class="row-container-show">
     <% @responses.shuffle.each do |response| %>
-      <div class="response-card">
+
         <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
-          <%= image_tag "error_529" %>
+          <div class="response-card">
+            <h4>Uh oh ... it seems like this AI won't be able to participate</h4>
+            <%= image_tag "error_529" %>
+          </div>
         <% else %>
-          <%= render "response", response: response %>
-          <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
+          <div class="response-card">
+            <%= render "response", response: response %>
+            <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
+          </div>
         <% end %>
-      </div>
+
     <% end %>
   </div>
 
@@ -45,14 +50,18 @@
 
   <div class="row-container-show">
       <% @responses.each do |response| %>
-        <div class="response-card">
+
           <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
-            <%= image_tag "error_529" %>
+            <div class="response-card">
+              <%= image_tag "error_529" %>
+            </div>
           <% else %>
-            <h4><%= response.model %></h4>
+            <div class="response-card">
+              <h4><%= response.model %></h4>
               <%= markdown_to_html(response.content) %>
+            </div>
           <% end %>
-        </div>
+
       <% end %>
     </div>
 
