@@ -1,77 +1,140 @@
-<h1 class="title-index"><%=@battles.any? ? "All battles" : "No battle in progress "%></h1>
+<script>
+        const monContainer = document.getElementById("unid");
+        function toLeft(container, scrollDistance) {
+          container.scrollBy({left: -scrollDistance, behavior: "smooth"});
+        }
+
+        function toRight(container, scrollDistance) {
+          container.scrollBy({left: scrollDistance, behavior: "smooth"});
+        }
+  </script>
 
 
-<!-- Début filter -->
-<div class="perfect-filter">
-<%= form_with url: battles_path, method: :get do |form| %>
-<!-- liste pour le status -->
-  <ul class="list-group" id="items-status">
-    <li class="list-group-item">
-      <!-- Radio pour "Toutes les battles" (aucun filtre) -->
-      <div class="form-check">
-        <%= radio_button_tag "status", "", params[:status].blank?, class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_all", "All", class: "form-check-label test-form" %>
-      </div>
-      <!-- Radio pour "In Progress" (winner NULL) -->
-      <div class="form-check">
-        <%= radio_button_tag "status", "nil", params[:status] == "nil", class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_in_progress", "In Progress", class: "form-check-label" %>
-      </div>
-      <!-- Radio pour "Finished" (winner NOT NULL) -->
-      <div class="form-check">
-        <%= radio_button_tag "status", "not_nil", params[:status] == "not_nil", class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_finished", "Finished", class: "form-check-label" %>
-      </div>
-    </li>
-  </ul>
-<!-- fin liste pour le status -->
-<!-- liste pour la category -->
-  <ul class="list-group" id="items-category">
-    <li class="list-group-item">
-        <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
-          <div class="form-check">
-            <%= check_box_tag "category[]", category, params[:category]&.include?(category), class: "form-check-input", onchange: "this.form.submit()" %>
-            <%= label_tag "category_#{category}", category, class: "form-check-label" %>
+<div class="index-container">
+  <h1 class="title-index"> <%= "Welcome back, #{current_user.pseudo} !" %> </h1>
+    <div class="first-row-index">
+      <h2 class="second-title">My stats</h2>
+      <div class="index-first-row">
+        <div class="user-infos">
+          <div class="user-infos-image">
+            <%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %>
           </div>
-        <% end %>
-    </li>
-  </ul>
-<!-- fin liste pour la category -->
-<!-- liste pour le status -->
-  <ul class="list-group" id="items-winner">
-    <li class="list-group-item">
-      <% Battle.where.not(winner: nil).select(:winner).distinct.order(:winner).pluck(:winner).each do |winner| %>
-        <div class="form-check">
-          <%= check_box_tag "winner[]", winner, params[:winner]&.include?(winner), class: "form-check-input", onchange: "this.form.submit()" %>
-          <%= label_tag "winner_#{winner}", winner, class: "form-check-label" %>
+
+          <div class="user-infos-text">
+            <span class="avatar-text"><%= current_user.pseudo %></span>
+            <span class="avatar-text"><%= "You have voted 123 times"%></span>
+            <span class="avatar-text"><%= "You have made 321 prompts" %></span>
+            <span class="avatar-text"><%= "Your prompts have received a total of 4221 votes" %></span>
+            <span class="avatar-text"><%= "Current rank : Noob" %></span>
+          </div>
         </div>
-      <% end %>
-    </li>
-  </ul>
-<!-- fin liste pour le status -->
-  <% end %>
-</div>
-<!-- fin filter -->
+
+
+      <div class="button"><%= button_to "Start a new battle", new_battle_path, method: :get, class: "button-new" %></div>
+
+
+        <div class="icon-ai">
+
+          <%= image_tag "logos_ai/claude.png", alt: "logo", class: " logo logo-ai-claude" %>
+          <%= image_tag "logos_ai/deepseek.png", alt: "logo", class: "logo logo-ai-deepseek" %>
+          <%#= image_tag "logos_ai/gemini.png", alt: "logo", class: "logo-ai" %>
+          <%= image_tag "logos_ai/grok.png", alt: "logo", class: "logo logo-ai-grok" %>
+          <%#= image_tag "logos_ai/meta.png", alt: "logo", class: "logo-ai" %>
+          <%= image_tag "logos_ai/Mistral.png", alt: "logo", class: "logo logo-ai-mistral" %>
+          <%#= image_tag "logos_ai/open_ai.png", alt: "logo", class: "logo-ai" %>
 
 
 
+        </div>
 
 
 
-<div class="row-container">
-  <% @battles.each do |battle| %>
-    <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
-      <div class="prompt-card">
-        <div class="prompt-top"><p><%= battle.prompt %></p></div>
-
-          <div class="prompt-card-body">
-            <div class="category"><%= battle.category.capitalize %></div>
-              <div class="last-elements-card">
-                <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
-              </div>
-          </div>
       </div>
-      <% end %>
-    <% end %>
+    </div>
+
+
+
+    <div class="second-row-index">
+      <h2 class="second-title">My battles</h2>
+        <div class="index-second-row" id="unid">
+
+          <% @battles.each do |battle| %>
+              <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
+                <div class="prompt-card">
+                  <div class="prompt-top"><p><%= battle.prompt %></p></div>
+
+                    <div class="prompt-card-body">
+                      <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="last-elements-card">
+                          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
+                          <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                        </div>
+                    </div>
+                </div>
+              <% end %>
+          <% end %>
+
+
+        </div>
+
+        <button onclick="toLeft(unid, 500)">Previous</button>
+        <button onclick="toRight(unid, 500)">Next</button>
+
+    </div>
+
+
+
+
+
+
+    <div class="third-row-index">
+      <h2 class="second-title">Opened battles</h2>
+        <div class="index-third-row">
+
+          <% @battles.each do |battle| %>
+              <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
+                <div class="prompt-card">
+                  <div class="prompt-top"><p><%= battle.prompt %></p></div>
+
+                    <div class="prompt-card-body">
+                      <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="last-elements-card">
+                          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
+                          <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                        </div>
+                    </div>
+                </div>
+              <% end %>
+          <% end %>
+
+        </div>
+
+        <button onclick="showMoreCards()">Show more</button>
+
+      </div>
+
+
+    <div class="fourth-row-index">
+      <h2 class="second-title">History</h2>
+        <div class="index-fourth-row">
+
+          <% @battles.each do |battle| %>
+              <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
+                <div class="prompt-card">
+                  <div class="prompt-top"><p><%= battle.prompt %></p></div>
+
+                    <div class="prompt-card-body">
+                      <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="last-elements-card">
+                          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
+                          <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                        </div>
+                    </div>
+                </div>
+              <% end %>
+          <% end %>
+
+        </div>
+    </div>
+
 </div>
