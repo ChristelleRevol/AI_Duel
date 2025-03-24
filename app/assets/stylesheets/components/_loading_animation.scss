@@ -1,0 +1,330 @@
+.animation {
+	position: relative;
+	/* width: 800px; Ajuste selon la taille de tes SVG */
+	height: 800px;
+	margin: 0 auto;
+}
+
+.frame {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	animation-duration: 9.78s; /* Durée totale */
+	animation-iteration-count: infinite;
+}
+
+/* Appliquer une animation différente à chaque image */
+.frame-1 {
+	animation-name: anim-frame-1;
+}
+.frame-2 {
+	animation-name: anim-frame-2;
+}
+.frame-3 {
+	animation-name: anim-frame-3;
+}
+.frame-4 {
+	animation-name: anim-frame-4;
+}
+.frame-5 {
+	animation-name: anim-frame-5;
+}
+.frame-6 {
+	animation-name: anim-frame-6;
+}
+.frame-7 {
+	animation-name: anim-frame-7;
+}
+.frame-8 {
+	animation-name: anim-frame-8;
+}
+.frame-9 {
+	animation-name: anim-frame-9;
+}
+.frame-10 {
+	animation-name: anim-frame-10;
+}
+.frame-11 {
+	animation-name: anim-frame-11;
+}
+.frame-12 {
+	animation-name: anim-frame-12;
+}
+.frame-13 {
+	animation-name: anim-frame-13;
+}
+.frame-14 {
+	animation-name: anim-frame-14;
+}
+.frame-15 {
+	animation-name: anim-frame-15;
+}
+.frame-16 {
+	animation-name: anim-frame-16;
+}
+.frame-17 {
+	animation-name: anim-frame-17;
+}
+.frame-18 {
+	animation-name: anim-frame-18;
+}
+
+/* Définition des animations */
+@keyframes anim-frame-1 {
+	0% {
+		opacity: 1;
+	}
+	6.89% {
+		opacity: 1;
+	}
+	6.90% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-2 {
+	6.89% {
+		opacity: 0;
+	}
+	6.90% {
+		opacity: 1;
+	}
+	13.78% {
+		opacity: 1;
+	}
+	13.79% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-3 {
+	13.78% {
+		opacity: 0;
+	}
+	13.79% {
+		opacity: 1;
+	}
+	20.67% {
+		opacity: 1;
+	}
+	20.68% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-4 {
+	20.67% {
+		opacity: 0;
+	}
+	20.68% {
+		opacity: 1;
+	}
+	27.56% {
+		opacity: 1;
+	}
+	27.57% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-5 {
+	27.56% {
+		opacity: 0;
+	}
+	27.57% {
+		opacity: 1;
+	}
+	34.45% {
+		opacity: 1;
+	}
+	34.46% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-6 {
+	34.45% {
+		opacity: 0;
+	}
+	34.46% {
+		opacity: 1;
+	}
+	41.34% {
+		opacity: 1;
+	}
+	41.35% {
+		opacity: 0;
+	}
+}
+
+/* Images qui durent 0.21s */
+@keyframes anim-frame-7 {
+	41.34% {
+		opacity: 0;
+	}
+	41.35% {
+		opacity: 1;
+	}
+	44.24% {
+		opacity: 1;
+	}
+	44.25% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-8 {
+	44.24% {
+		opacity: 0;
+	}
+	44.25% {
+		opacity: 1;
+	}
+	47.14% {
+		opacity: 1;
+	}
+	47.15% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-9 {
+	47.14% {
+		opacity: 0;
+	}
+	47.15% {
+		opacity: 1;
+	}
+	50.04% {
+		opacity: 1;
+	}
+	50.05% {
+		opacity: 0;
+	}
+}
+
+/* Retour aux images de 0.5s */
+@keyframes anim-frame-10 {
+	50.04% {
+		opacity: 0;
+	}
+	50.05% {
+		opacity: 1;
+	}
+	56.94% {
+		opacity: 1;
+	}
+	56.95% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-11 {
+	56.94% {
+		opacity: 0;
+	}
+	56.95% {
+		opacity: 1;
+	}
+	63.83% {
+		opacity: 1;
+	}
+	63.84% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-12 {
+	63.83% {
+		opacity: 0;
+	}
+	63.84% {
+		opacity: 1;
+	}
+	70.72% {
+		opacity: 1;
+	}
+	70.73% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-13 {
+	70.72% {
+		opacity: 0;
+	}
+	70.73% {
+		opacity: 1;
+	}
+	77.61% {
+		opacity: 1;
+	}
+	77.62% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-14 {
+	77.61% {
+		opacity: 0;
+	}
+	77.62% {
+		opacity: 1;
+	}
+	84.50% {
+		opacity: 1;
+	}
+	84.51% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-15 {
+	84.50% {
+		opacity: 0;
+	}
+	84.51% {
+		opacity: 1;
+	}
+	91.39% {
+		opacity: 1;
+	}
+	91.40% {
+		opacity: 0;
+	}
+}
+
+/* Images qui durent 0.21s */
+@keyframes anim-frame-16 {
+	91.39% {
+		opacity: 0;
+	}
+	91.40% {
+		opacity: 1;
+	}
+	94.29% {
+		opacity: 1;
+	}
+	94.30% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-17 {
+	94.29% {
+		opacity: 0;
+	}
+	94.30% {
+		opacity: 1;
+	}
+	97.19% {
+		opacity: 1;
+	}
+	97.20% {
+		opacity: 0;
+	}
+}
+@keyframes anim-frame-18 {
+	97.19% {
+		opacity: 0;
+	}
+	97.20% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+	}
+	100.1% {
+		opacity: 0;
+	}
+}
