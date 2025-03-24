@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :battles, only: %i[index show new create] do
     collection do
       get :index_ongoing
+      get :history
     end
     resources :votes, only: %i[create]
   end
