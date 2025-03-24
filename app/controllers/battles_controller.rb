@@ -51,8 +51,9 @@ class BattlesController < ApplicationController
   end
 
   def create_responses(battle)
-    Response.create(model: "Claude", battle: battle)
-    Response.create(model: "OpenAI", battle: battle)
-    Response.create(model: "Mistral", battle: battle)
+    models = ["Claude", "OpenAI", "Mistral"]
+    models.shuffle.each do |model|
+      Response.create(model: model, battle: battle)
+    end
   end
 end
