@@ -1,0 +1,4 @@
+<div id="<%= dom_id(response) %>">
+  <%= turbo_stream_from dom_id(response) %>
+  <%= markdown_to_html(response.content || image_tag("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmtoZzUyZHRyNDUxcXF1MXEwMDFiZjdtd3E1Z2NhNjdoYWd1enZocCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ckT6DIY8YfGluTxLrP/giphy.gif", size: "300")) %>
+</div>

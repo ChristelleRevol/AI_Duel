@@ -15,12 +15,12 @@
   }) %></div>
 
   <div class="row-container-show">
-    <% @responses.each do |response| %>
-    <div class="response-card">
-          <div><%= markdown_to_html(response.content) %></div>
-          <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
-      <%#= response.votes.count %>
-    </div>
+    <% @responses.shuffle.each do |response| %>
+      <div class="response-card">
+        <%= render "response", response: response %>
+        <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
+        <%#= response.votes.count %>
+      </div>
     <% end %>
   </div>
 

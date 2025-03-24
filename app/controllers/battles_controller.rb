@@ -21,9 +21,6 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-    @claude_response = @battle.claude_response
-    @openai_response = @battle.openai_response
-    @mistral_response = @battle.mistral_response
     @responses = @battle.responses
 
     @votes_count_ranking = @responses.map { |response| response.votes.count }.sort_by { |response| -response }
@@ -38,7 +35,8 @@ class BattlesController < ApplicationController
   def create
     @battle = Battle.new(battle_params)
     @battle.user = current_user
-    if @battle.save!
+    if @battle.save
+      create_responses(@battle)
       flash[:notice] = "Battle successfully created"
       redirect_to battle_path(@battle)
     else
@@ -50,5 +48,11 @@ class BattlesController < ApplicationController
 
   def battle_params
     params.require(:battle).permit(:category, :end_date, :prompt)
+  end
+
+  def create_responses(battle)
+    Response.create(model: "Claude", battle: battle)
+    Response.create(model: "OpenAI", battle: battle)
+    Response.create(model: "Mistral", battle: battle)
   end
 end
