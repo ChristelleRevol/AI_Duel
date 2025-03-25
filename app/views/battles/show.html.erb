@@ -19,8 +19,10 @@
 
         <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
           <div class="response-card">
-            <h4>Uh oh ... it seems like this AI won't be able to participate</h4>
-            <%= image_tag "error_529" %>
+            <div class="show-error-card">
+              <h5>Uh oh ... it seems like this AI won't be able to participate</h5>
+              <%= image_tag "error_529_vector" %>
+            </div>
           </div>
         <% else %>
           <div class="response-card">
@@ -53,7 +55,8 @@
 
           <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
             <div class="response-card">
-              <%= image_tag "error_529" %>
+              <h4>Sorry, this AI couldn't participate</h4>
+              <%= image_tag "error_529_vector" %>
             </div>
           <% else %>
             <div class="response-card">

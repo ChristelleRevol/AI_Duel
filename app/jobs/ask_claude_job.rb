@@ -1,7 +1,7 @@
 class AskClaudeJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(battle)
     response = battle.responses.find_or_create_by(model: "Claude")
     begin
       if response.content.nil?
