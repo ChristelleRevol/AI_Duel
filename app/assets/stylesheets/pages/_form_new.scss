@@ -1,27 +1,119 @@
 .container-form-new {
+  background-color: rgba(27, 31, 50, 0.2);
+  color: white;
+  margin: auto;
+  width: 50%;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#battle_prompt {
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.category-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.category-item {
+  margin: auto 10px;
+}
+
+.category-item i {
+  background-color: white;
+  color: rgb(0, 173, 171);
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.category-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.category-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 101px;
+  height: 65px;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 10px 30px 10px;
+  border-radius: 10px;
+  background-color: rgb(0, 173, 171);
   color: white;
 }
 
-.row-1 {
-  display: flex;
+.category-selector:checked + label {
+  color: white !important;
+  background-color: rgb(27, 31, 50);
 }
 
-.row-1-left {
+.duration-wrapper {
   display: flex;
-  width: 25%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
-.form-category {
-background-color: #1B1F32;
-padding: 8px;
-border-radius: 10px;
+.duration-item {
+  margin: auto 5px;
 }
 
-.row-1-right {
+.duration-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.duration-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 70px;
+  height: 20px;
+  font-size: 12px;
+  text-align: center;
+  padding: 10px 10px 30px 10px;
+  border-radius: 10px;
+  background-color: rgb(0, 173, 171);
+  color: white;
+}
+
+.duration-selector:checked + label {
+  color: white !important;
+  background-color: rgb(27, 31, 50);
+}
+
+.prompt {
+  margin: 2em 0;
+}
+
+.buttons {
   display: flex;
-  flex-direction: column;
-  width: 75%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3em;
+}
+
+.back-icon {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  width: 55px;
+  height: 55px;
+  padding: 6px;
+  border-radius: 50%;
+  background-color: rgb(27, 31, 50);
+  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.33);
+  transition: 0.3s ease;
+}
+
+.back-icon:hover {
+  outline: 1px solid rgba(255,204,98,0.67);
+  box-shadow: 0px 0px 20px 2px rgba(255,204,98,0.67);
 }
