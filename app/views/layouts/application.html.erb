@@ -18,19 +18,13 @@
   </head>
 
   <body class="min-vh-100">
-    <!-- loading navbar except for the root -->
-    <% unless current_page?(root_path)  %>
+    <% unless current_page?(root_path) || controller_name == "errors"  %>
       <%= render "shared/navbar" %>
     <% end %>
-    <!-- end navbar -->
-    <!-- loading flashes & notices -->
     <%= render "shared/flashes" %>
-    <!-- end of flashes & notices -->
     <%= yield %>
-    <!-- loading footer except for the root -->
-    <% unless current_page?(root_path)  %>
+    <% unless current_page?(root_path) || controller_name == "errors"  %>
       <%= render "shared/footer" %>
     <% end %>
-    <!-- end footer -->
   </body>
 </html>

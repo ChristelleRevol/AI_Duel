@@ -3,11 +3,22 @@ class AskClaudeJob < ApplicationJob
 
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "Claude")
-    if response.content.nil?
-      content = api_response(battle)
-      response.update(content: content)
+    begin
+      if response.content.nil?
+        content = api_response(battle)['content'][0]['text']
+        token = api_response(battle)['usage']['input_tokens'] + api_response(battle)['usage']['output_tokens']
+        response.update(content: content)
+        response.update(token: token)
+      end
+    rescue Anthropic::Error => e
+      Rails.logger.error "Anthropic Error: #{e.message}"
+      response.update(content: "API Error")
+    rescue StandardError => e
+      Rails.logger.error "General Error : #{e.message}"
+      response.update(content: "an unknown error has occurred")
+    ensure
+      broadcast(response, battle)
     end
-    broadcast(response, battle)
   end
 
   private
@@ -21,7 +32,7 @@ class AskClaudeJob < ApplicationJob
         messages: [{ role: "user", content: battle.prompt }],
         max_tokens: 1000
       }
-    )['content'][0]['text']
+    )
   end
 
   def broadcast(response, battle)
