@@ -1,37 +1,58 @@
 <% if DateTime.now < @battle.end_date %>
 <%# if @battle.winner.nil? %>
 
-  <div class="user-prompt">
-    <%= @battle.prompt %>
+  <div class="user-prompt-and-infos">
+    <div class="user-prompt">
+      <%= @battle.prompt %>
+    </div>
+    <div>
+      <!-- Timer -->
+      <% seconds_until_target_time = @battle.end_date.to_time.to_i - Time.now.to_i %>
+
+      <div class="user-infos-and-timer">
+        <div class="timer user-infos"><%= content_tag(:h1, "", data: {
+          controller: "timer",
+          timer_target: "timer",
+          seconds_until_end_value: seconds_until_target_time
+        }) %></div>
+      </div>
+
+      <div class="user-infos-and-timer mt-2">
+        <div class="user-infos">
+          <% if @battle.user.photo.attached?%>
+            <%= cl_image_tag @battle.user.photo.key, class: 'avatar' %>
+          <% else %>
+            <%= image_tag "Default_avatar.jpg", class: 'avatar' %>
+          <% end %>
+            <span class="ms-3"><%= @battle.user.pseudo %></span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Timer -->
-  <% seconds_until_target_time = @battle.end_date.to_time.to_i - Time.now.to_i %>
-
-  <div class="timer"><%= content_tag(:h1, "", data: {
-    controller: "timer",
-    timer_target: "timer",
-    seconds_until_end_value: seconds_until_target_time
-  }) %></div>
+  <h2 class="choose text-turquoize-color">Choose the best answer</h2>
 
   <div class="row-container-show">
-    <% @responses.shuffle.each do |response| %>
-
+    <% @responses.each do |response| %>
         <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
           <div class="response-card">
             <div class="show-error-card">
-              <h5>Uh oh ... it seems like this AI won't be able to participate</h5>
+              <h5 class="error-card-text">Uh oh ... it seems like this AI won't be able to participate</h5>
               <%= image_tag "error_529_vector" %>
             </div>
           </div>
         <% else %>
-          <div class="response-card">
-            <%= render "response", response: response %>
-            <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %></div>
-          </div>
+
+          <%= link_to battle_votes_path(@battle, response_id: response.id), data: {turbo_method: :post} , class: 'response-card', remote: true do %>
+            <i class="fa-solid fa-heart heart"></i>
+            <%= render "response", response: response, battle: @battle, user: current_user, vote: @vote %>
+            <%# <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %>
+          <% end %>
+
         <% end %>
 
     <% end %>
+
   </div>
 
 <% else %>
@@ -55,8 +76,10 @@
 
           <% if response.content == "API Error" || response.content == "an unknown error has occurred" %>
             <div class="response-card">
-              <h4>Sorry, this AI couldn't participate</h4>
-              <%= image_tag "error_529_vector" %>
+              <div class="show-error-card">
+                <h5 class="error-card-text">Sorry, this AI couldn't participate</h5>
+                <%= image_tag "error_529_vector" %>
+              </div>
             </div>
           <% else %>
             <div class="response-card">

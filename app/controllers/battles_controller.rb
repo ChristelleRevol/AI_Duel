@@ -27,6 +27,7 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     @responses = @battle.responses
+    @vote = Vote.find_by(user: current_user, battle: @battle)
 
     @votes_count_ranking = @responses.map { |response| response.votes.count }.sort_by { |response| -response }
 
