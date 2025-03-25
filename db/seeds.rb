@@ -28,16 +28,16 @@ puts "Creating users..."
 end
 
 puts "Creating battles..."
-# User.first(5).each do |user|
-User.all.each do |user|
-  rand(1..10).times do
-    Battle.create(
-      category: categories.sample,
-      prompt: Faker::Lorem.paragraphs(number: rand(3..5)).join(" "),
-      end_date: Faker::Time.between_dates(from: Date.today - 1, to: Date.today + 2, period: :all),
-      user: user
-    )
-  end
+User.first(5).each do |user|
+  # User.all.each do |user|
+  #   rand(1..10).times do
+  Battle.create(
+    category: categories.sample,
+    prompt: Faker::Lorem.paragraphs(number: rand(3..5)).join(" "),
+    end_date: Faker::Time.between_dates(from: Date.today - 1, to: Date.today + 2, period: :all),
+    user: user
+  )
+  # end
 end
 
 puts "Creating responses..."
