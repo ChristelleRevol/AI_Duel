@@ -46,16 +46,9 @@
       <%# <h2 class="second-title">My stats</h2> %>
       <div class="index-first-row">
         <div class="user-infos">
-<<<<<<< HEAD
           <div class="user-infos-image"><%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %></div>
           <div class="infos-user-left">
-              <div class="avatar-text-lg"><%= current_user.pseudo %></div>
               <div class="user-infos-text">
-=======
-          <div class="user-infos-image">
-            <%#= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %>
-          </div>
->>>>>>> master
 
                 <div class="square-info">
                   <div class="square-info-title">Prompts</div>
@@ -89,7 +82,6 @@
           <div class="button"><%= button_to "Start a new battle", new_battle_path, method: :get, class: "button-new" %></div>
 
             <div class="ia-right">
-              <div class="avatar-text-lg"><%= "IA" %></div>
               <div class="all-logos">
                   <div class="logo-with-name">
                     <div class="logo-name">Claude</div>
@@ -210,7 +202,7 @@
 
         </div>
 
-        <div class="button-row"><div class="button-slide"><%= link_to "See all history", history_battles_path, class: 'text-decoration-none' %></div></div>
+        <div class="button-row"><%= link_to "See all history", history_battles_path, class: 'd-inline-block button-slide' %></div>
 
     </div>
 
