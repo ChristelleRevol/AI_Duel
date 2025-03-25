@@ -52,15 +52,22 @@
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/500_error.css">
 </head>
 
-<body class="rails-default-error-page">
+<body class="body-class">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+  <div class="container">
+    <div >
+      <h1 class="error-h1">Error 500</h1>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+
+    <p class="error-text">The AIs are dueling too hard. One of them tried to divide by zero. Our backend just had an existential crisis. We're negotiating with the database right now. In the meantime, you can meditate... or refresh?</p>
+    <img src="./Images/error_529_vector.svg" alt="error 500 image" class="error-img">
+    <p class="error-text">"Yolo code detected. Please sedate Mathieu."</p>
   </div>
 </body>
 </html>

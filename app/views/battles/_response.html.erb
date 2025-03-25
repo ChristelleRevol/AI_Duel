@@ -4,6 +4,11 @@
   <% if response.content.nil? %>
     <%= markdown_to_html(render "loading_animation") %>
   <% else %>
-    <%= markdown_to_html(response.content) %>
+    <% if Vote.user_voted?(user, battle) && !vote.nil? && response.model == vote.response.model %>
+      <p class="text-turquoize-color mb-2 text-center fs-3"><%= vote.response.model %></p>
+      <p class="mb-3 text-gray-color">tokens: <%= vote.response.token %></p>
+    <% end %>
+
+    <p class="response-content-text"><%= markdown_to_html(response.content) %></p>
   <% end %>
 </div>
