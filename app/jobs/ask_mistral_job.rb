@@ -3,11 +3,22 @@ class AskMistralJob < ApplicationJob
 
   def perform(battle)
     response = battle.responses.find_or_create_by(model: "Mistral")
-    if response.content.nil?
-      content = api_response(battle)
-      response.update(content: content)
+    begin
+      if response.content.nil?
+        content = api_response(battle)['choices'][0]['message']['content']
+        token = api_response(battle)['usage']['total_tokens']
+        response.update(content: content)
+        response.update(token: token)
+      end
+    rescue HTTParty::Error => e
+      Rails.logger.error "HTTParty Error: #{e.message}"
+      response.update(content: "API Error")
+    rescue StandardError => e
+      Rails.logger.error "General Error : #{e.message}"
+      response.update(content: "an unknown error has occurred")
+    ensure
+      broadcast(response, battle)
     end
-    broadcast(response, battle)
   end
 
   private
@@ -25,7 +36,7 @@ class AskMistralJob < ApplicationJob
                 { role: "system", content: "You're an expert in the following field: #{battle.category}" },
                 { role: "user", content: battle.prompt }
               ] }.to_json
-    )['choices'][0]['message']['content']
+    )
   end
 
   def broadcast(response, battle)

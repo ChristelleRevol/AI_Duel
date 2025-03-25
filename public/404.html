@@ -3,7 +3,7 @@
 <head>
   <title>The page you were looking for doesn't exist (404)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
+  <!-- <style>
   /* .rails-default-error-page {
     background-color: #EFEFEF;
     color: #2E2F30;
@@ -51,16 +51,54 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   } */
-  </style>
+  </style> -->
+  <link rel="stylesheet" href="./styles/404_error.css">
 </head>
 
-<body class="rails-default-error-page">
+<!-- <body class="rails-default-error-page"> -->
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
+  <!-- <div class="dialog">
     <div>
       <h1>404</h1>
     </div>
     <p>A wild 404 Fighter appeared... but the page ran away. This page either doesn't exist, or it's hiding behind an invisibility cloak.Want to go back and pretend this never happened?</p>
   </div>
 </body>
-</html>
+</html> -->
+
+<!-- Page 404 avec anim css -->
+
+<body class="bg-purple">
+
+  <div class="stars">
+
+      <div class="central-body">
+        <div class="img-404-container">
+          <img class="image-404" src="http://salehriaz.com/404Page/img/404.svg" width="300px">
+        </div>
+          <p class="white-text">A wild 404 Fighter appeared... but the page ran away. This page either doesn't exist, or it's hiding behind a planet.</p>
+          <p class="white-text">Want to go back and pretend this never happened?</p>
+          <a href="/" class="btn-go-home">GO BACK</a>
+      </div>
+      <div class="objects">
+          <img class="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px">
+          <div class="earth-moon">
+              <img class="object_earth" src="http://salehriaz.com/404Page/img/earth.svg" width="100px">
+              <img class="object_moon" src="http://salehriaz.com/404Page/img/moon.svg" width="80px">
+          </div>
+          <div class="box_astronaut">
+              <img class="object_astronaut" src="http://salehriaz.com/404Page/img/astronaut.svg" width="140px">
+          </div>
+      </div>
+      <div class="glowing_stars">
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+
+      </div>
+
+  </div>
+
+</body>

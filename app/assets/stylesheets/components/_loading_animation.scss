@@ -1,7 +1,16 @@
+.crop-wrapper {
+  width: 100%; /* Même largeur que .animation */
+  height: 350px; /* Hauteur visible après crop (ajuste selon besoin) */
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  right: 15px;
+}
+
 .animation {
 	position: relative;
-	/* width: 800px; Ajuste selon la taille de tes SVG */
-	height: 800px;
+	height: 400px;
+  width: 100%;
 	margin: 0 auto;
 }
 
@@ -14,9 +23,10 @@
 	opacity: 0;
 	animation-duration: 9.78s; /* Durée totale */
 	animation-iteration-count: infinite;
+  object-fit: cover;
 }
 
-/* Appliquer une animation différente à chaque image */
+/* animation différente pour chaque image */
 .frame-1 {
 	animation-name: anim-frame-1;
 }

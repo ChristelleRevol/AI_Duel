@@ -1,29 +1,43 @@
-<% if user_signed_in? %>
 <%= simple_form_for battle do |f| %>
+
 <div class="container-form-new">
-  <div class="row-1">
-    <div class="row-1-left"> <div class="form-category"><%= f.input :category, as: :radio_buttons, collection: ["Content generation", "Research", "Discussion", "Mathematics", "Image generation"], checked: "Content generation", class: "new-category"%></div></div>
-    <div class="row-1-right">
-      <div class="datepicker"><%= f.input :end_date, as: :string,
-        input_html: {
-          data: { controller: "datepicker"},
-          placeholder: Date.today,
-          } %></div>
-      <div class="prompt"><%= f.input :prompt, label: 'Enter your prompt here' %></div>
-    </div>
+
+  <%= f.input :category,
+              as: :radio_buttons,
+              required: false,
+              collection_wrapper_tag: 'div',
+              collection_wrapper_class: 'category-wrapper',
+              item_wrapper_class: 'category-item',
+              input_html: {class: 'category-selector'},
+              collection: Response::CATEGORIES,
+              label_method:
+                  lambda { |category|
+                    render "icons", category: category
+                 } %>
+
+  <%= f.input :end_date,
+              label: "Ends in",
+              as: :radio_buttons,
+              required: false,
+              collection_wrapper_tag: 'div',
+              collection_wrapper_class: 'duration-wrapper',
+              item_wrapper_class: 'duration-item',
+              input_html: {class: 'duration-selector'},
+              collection: Response::DURATIONS %>
+
+  <div class="prompt form-floating">
+    <%= f.input :prompt, label: false, wrapper: false, class: "custom-height"%>
+    <%= f.label :prompt, "Your prompt" %>
   </div>
-  <div class="row-2">
-    <div class="button"><%= f.button :submit, 'Battle now !', class: 'start-button' %></div>
+
+  <div class="buttons">
+    <%= link_to :back do %>
+      <%# <i class="fas fa-circle-arrow-left back-icon"></i> %>
+      <i class="fa-solid fa-arrow-left back-icon"></i>
+    <% end %>
+    <%= f.button :submit, 'Battle now !', class: 'button-new' %>
   </div>
+
 </div>
 
-
-  <% end %>
-<% else %>
-<div class="container">
-<div class="connect-box">
-  <p>Wait a minute..😒 <br> You need an account in order to start a battle.</p>
-  <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
-</div>
-</div>
 <% end %>
