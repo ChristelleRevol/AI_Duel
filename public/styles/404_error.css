@@ -130,6 +130,10 @@ body {
 	overflow: hidden;
 }
 
+.p-margin {
+	margin-bottom: 3%;
+}
+
 .custom-navbar {
 	padding-top: 15px;
 }
