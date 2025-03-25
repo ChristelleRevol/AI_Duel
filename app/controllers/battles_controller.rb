@@ -19,6 +19,11 @@ class BattlesController < ApplicationController
     render "index_ongoing"
   end
 
+  def history
+    @battles = Battle.where.not(winner: nil)
+    render "history"
+  end
+
   def show
     @battle = Battle.find(params[:id])
     @responses = @battle.responses

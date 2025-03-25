@@ -9,6 +9,35 @@
         }
   </script>
 
+<script>
+    document.addEventListener("turbo:load", function () {
+        const cards = document.querySelectorAll(".prompt-card-third-row");
+        const button = document.getElementById("loadMore");
+        let visibleCount = 0; // Nombre d'éléments actuellement visibles
+
+        function showMoreCards() {
+            let nextCards = Array.from(cards).slice(visibleCount, visibleCount + 3);
+            nextCards.forEach(card => card.classList.remove("hidden"));
+            visibleCount += 3;
+
+            // Cache le bouton si tous les éléments sont affichés
+            if (visibleCount >= cards.length) {
+                button.style.display = "none";
+            }
+        }
+
+        // Afficher les 3 premiers éléments au chargement
+        showMoreCards();
+
+        // Ajouter un événement au bouton
+        button.addEventListener("click", showMoreCards);
+    });
+</script>
+
+
+
+
+
 
 <div class="index-container">
   <h1 class="title-index"> <%= "Welcome back, #{current_user.pseudo} !" %> </h1>
@@ -76,9 +105,10 @@
 
 
         </div>
-
-        <button onclick="toLeft(unid, 500)">Previous</button>
-        <button onclick="toRight(unid, 500)">Next</button>
+          <div class="button-row">
+            <button class="button-slide" onclick="toLeft(unid, 500)"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="button-slide" onclick="toRight(unid, 500)"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
 
     </div>
 
@@ -89,11 +119,11 @@
 
     <div class="third-row-index">
       <h2 class="second-title">Opened battles</h2>
-        <div class="index-third-row">
+        <div class="index-third-row" id="itemContainer">
 
           <% @battles.each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
-                <div class="prompt-card">
+                <div class="prompt-card-third-row hidden">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>
 
                     <div class="prompt-card-body">
@@ -109,7 +139,7 @@
 
         </div>
 
-        <button onclick="showMoreCards()">Show more</button>
+        <div class="button-row"><button id="loadMore" class="button-slide">Show more</button></div>
 
       </div>
 
@@ -135,6 +165,10 @@
           <% end %>
 
         </div>
+
+        <div class="button-row"><div class="button-slide"><%= link_to "See all history", history_battles_path, class: 'text-decoration-none' %></div></div>
+
     </div>
+
 
 </div>
