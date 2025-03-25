@@ -24,3 +24,35 @@
 <%# <div class="card-row"> %>
   <%#= link_to "Login", new_user_session_path, class: "btn-login" %>
 <%# </div> %>
+
+
+    <!-- Début filter -->
+    <div class="perfect-filter">
+    <%= form_with url: history_battles_path, method: :get do |form| %>
+    <!-- liste pour la category -->
+      <ul class="list-group" id="items-category">
+        <li class="list-group-item">
+            <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
+              <div class="form-check">
+                <%= check_box_tag "category[]", category, params[:category]&.include?(category), class: "form-check-input", onchange: "this.form.submit()" %>
+                <%= label_tag "category_#{category}", category, class: "form-check-label" %>
+              </div>
+            <% end %>
+        </li>
+      </ul>
+    <!-- fin liste pour la category -->
+    <!-- liste pour le status -->
+      <ul class="list-group" id="items-winner">
+        <li class="list-group-item">
+          <% Battle.where.not(winner: nil).select(:winner).distinct.order(:winner).pluck(:winner).each do |winner| %>
+            <div class="form-check">
+              <%= check_box_tag "winner[]", winner, params[:winner]&.include?(winner), class: "form-check-input", onchange: "this.form.submit()" %>
+              <%= label_tag "winner_#{winner}", winner, class: "form-check-label" %>
+            </div>
+          <% end %>
+        </li>
+      </ul>
+    <!-- fin liste pour le status -->
+      <% end %>
+    </div>
+    <!-- fin filter -->

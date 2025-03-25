@@ -59,7 +59,7 @@
 }
 
 .test-form {
-position: absolute;
+  position: absolute;
 }
 
 .title-index {
@@ -67,92 +67,3 @@ position: absolute;
   text-align: center;
   margin: 1rem;
 }
-
-// .prompt-card {
-//   color: white;
-//   display: grid;
-//   grid-template-columns: 3fr 1fr;
-//   grid-template-rows: 4fr repeat(2, 1fr);
-//   // border: 1px solid white;
-//   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
-//   width: 30%;
-//   border-radius: 10px;
-//   padding: 10px;
-//   height: 350px;
-//   // background-color: #3c2955;
-//   background-color: #353257;
-//   // #35343e
-//   // #44415f
-//   position: relative;
-//   z-index: 0;
-//   overflow: hidden;
-//   border: none;
-
-//   // &:before {
-//   //   content: "";
-//   //   position: absolute;
-//   //   z-index: -1;
-//   //   top: -16px;
-//   //   right: -16px;
-//   //   background: #7752FE;
-//   //   height: 32px;
-//   //   width: 32px;
-//   //   border-radius: 32px;
-//   //   transform: scale(1);
-//   //   transform-origin: 50% 50%;
-//   //   transition: transform 0.3s ease-out;
-//   // }
-
-//   // &:hover:before {
-//   //   transform: scale(50);
-//   // }
-// }
-
-// .prompt-card-infos {
-//   height: 200px;
-//   width: 200%;
-//   background-color: #5b58d1;
-//   // #2fa3d7
-// }
-
-
-// // .prompt-card p {
-// //   color: white;
-// // }
-
-// .prompt {
-//   grid-area: 1 / 1 / 2 / 3;
-// }
-
-// .category {
-//   grid-area: 2 / 1 / 3 / 2;
-//   align-self: end;
-// }
-
-// .pseudo {
-//   grid-area: 3 / 1 / 4 / 2;
-//   align-self: end;
-// }
-
-// .pseudo p {
-//   margin: 0;
-// }
-
-// .status {
-//   grid-area: 3 / 2 / 4 / 3;
-//   align-self: end;
-// }
-
-// @media (max-width: 900px) {
-//   .prompt-card {
-//     width: calc(50% - 16px);
-//     flex: 1 1 calc(50% - 16px);
-//   }
-// }
-
-// @media (max-width: 600px) {
-//   .prompt-card {
-//     width: 100%;
-//     flex: 1 1 100%;
-//   }
-// }
