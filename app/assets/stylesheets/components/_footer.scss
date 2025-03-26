@@ -2,6 +2,49 @@ footer {
   background-color: #1B1F32;
   text-align: center;
   color: #00ADAB;
-  padding: 1rem 0;
+}
 
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0 0 0;
+  margin: 0;
+}
+
+.footer-links a {
+  position: relative;
+  color: #00ADAB;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: rgba(255, 204, 98, 0.67);
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-out, width 0.3s ease-out, left 0.3s ease-out;
+  box-shadow: 0px 0px 20px 2px rgba(255, 204, 98, 0.67);
+}
+
+.footer-links a:hover::after,
+.footer-links a.active::after {
+  transform: scaleX(1);
+  width: 100%;
+  left: 0;
+}
+
+.spacer {
+  height: 4rem;
 }

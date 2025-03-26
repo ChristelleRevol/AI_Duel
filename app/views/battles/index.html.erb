@@ -41,49 +41,85 @@
 
 <div class="index-container">
   <h1 class="title-index"> <%= "Welcome back, #{current_user.pseudo} !" %> </h1>
-    <div class="first-row-index">
-      <h2 class="second-title">My stats</h2>
+
+    <%# <div class="first-row-index"> %>
+      <%# <h2 class="second-title">My stats</h2> %>
       <div class="index-first-row">
         <div class="user-infos">
-          <div class="user-infos-image">
-            <%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %>
-          </div>
+          <div class="user-infos-image"><%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %></div>
+          <div class="infos-user-left">
+              <div class="user-infos-text">
 
-          <div class="user-infos-text">
-            <span class="avatar-text"><%= current_user.pseudo %></span>
-            <span class="avatar-text"><%= "You have voted 123 times"%></span>
-            <span class="avatar-text"><%= "You have made 321 prompts" %></span>
-            <span class="avatar-text"><%= "Your prompts have received a total of 4221 votes" %></span>
-            <span class="avatar-text"><%= "Current rank : Noob" %></span>
+                <div class="square-info">
+                  <div class="square-info-title">Prompts</div>
+                  <div class="square-info-bottom">
+                    <i class="fa-solid fa-terminal"></i><span>123</span>
+                  </div>
+                </div>
+                <div class="square-info">
+                  <div class="square-info-title">Votes</div>
+                  <div class="square-info-bottom">
+                    <i class="fa-solid fa-heart"></i><span>321</span>
+                  </div>
+                </div>
+                <div class="square-info">
+                  <div class="square-info-title">Votes received</div>
+                  <div class="square-info-bottom">
+                    <i class="fa-solid fa-check-to-slot"></i><span>4221</span>
+                  </div>
+                </div>
+                <div class="square-info">
+                  <div class="square-info-title">Rank</div>
+                  <div class="square-info-bottom">
+                    <i class="fa-solid fa-ranking-star"></i><span>Noob</span>
+                  </div>
+                </div>
+
+            </div>
           </div>
         </div>
 
+          <div class="button"><%= button_to "Start a new battle", new_battle_path, method: :get, class: "button-new" %></div>
 
-      <div class="button"><%= button_to "Start a new battle", new_battle_path, method: :get, class: "button-new" %></div>
+            <div class="ia-right">
+              <div class="all-logos">
+                  <div class="logo-with-name">
+                    <div class="logo-name">Claude</div>
+                    <%= image_tag "logos_ai/claude.png", alt: "logo", class: " logo" %>
+                  </div>
 
+                  <div class="logo-with-name">
+                    <div class="logo-name">Deepseek</div>
+                    <%= image_tag "logos_ai/deepseek.png", alt: "logo", class: "logo" %>
+                  </div>
 
-        <div class="icon-ai">
+                  <div class="logo-with-name">
+                    <div class="logo-name">Grok</div>
+                    <%= image_tag "logos_ai/grok.png", alt: "logo", class: "logo" %>
+                  </div>
 
-          <%= image_tag "logos_ai/claude.png", alt: "logo", class: " logo logo-ai-claude" %>
-          <%= image_tag "logos_ai/deepseek.png", alt: "logo", class: "logo logo-ai-deepseek" %>
-          <%#= image_tag "logos_ai/gemini.png", alt: "logo", class: "logo-ai" %>
-          <%= image_tag "logos_ai/grok.png", alt: "logo", class: "logo logo-ai-grok" %>
-          <%#= image_tag "logos_ai/meta.png", alt: "logo", class: "logo-ai" %>
-          <%= image_tag "logos_ai/Mistral.png", alt: "logo", class: "logo logo-ai-mistral" %>
-          <%#= image_tag "logos_ai/open_ai.png", alt: "logo", class: "logo-ai" %>
+                  <div class="logo-with-name">
+                    <div class="logo-name">Mistral</div>
+                    <%= image_tag "logos_ai/Mistral.png", alt: "logo", class: " logo" %>
+                  </div>
 
+                <div class="logo-with-name">
+                  <div class="logo-name">ChatGPT</div>
+                  <%= image_tag "logos_ai/chatgpt.png", alt: "logo", class: " logo" %>
+                </div>
 
-
-        </div>
-
-
-
+                <div class="logo-with-name">
+                  <div class="logo-name">Meta</div>
+                  <%= image_tag "logos_ai/meta.png", alt: "logo", class: " logo" %>
+                </div>
+            </div>
+          </div>
       </div>
-    </div>
+    <%# </div> %>
 
 
 
-    <div class="second-row-index">
+    <%# <div class="second-row-index"> %>
       <h2 class="second-title">My battles</h2>
         <div class="index-second-row" id="unid">
 
@@ -110,7 +146,7 @@
             <button class="button-slide" onclick="toRight(unid, 500)"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
 
-    </div>
+    <%# </div> %>
 
 
 
@@ -166,7 +202,7 @@
 
         </div>
 
-        <div class="button-row"><div class="button-slide"><%= link_to "See all history", history_battles_path, class: 'text-decoration-none' %></div></div>
+        <div class="button-row"><%= link_to "See all history", history_battles_path, class: 'd-inline-block button-slide' %></div>
 
     </div>
 

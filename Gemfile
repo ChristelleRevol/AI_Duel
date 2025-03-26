@@ -55,6 +55,7 @@ gem 'redcarpet'
 gem 'mistral_rb'
 gem "dotenv-rails"
 gem "cloudinary"
+gem "inline_svg"
 
 group :development, :test do
 

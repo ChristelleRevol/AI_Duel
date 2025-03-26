@@ -17,12 +17,13 @@
     <%= favicon_link_tag 'favicon.svg' %>
   </head>
 
-  <body class="min-vh-100">
+  <body class="d-flex flex-column min-vh-100">
     <% unless current_page?(root_path) || controller_name == "errors"  %>
-      <%= render "shared/navbar" %>
+      <%= render "shared/nnavbar" %>
     <% end %>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <span class="spacer"></span>
     <% unless current_page?(root_path) || controller_name == "errors"  %>
       <%= render "shared/footer" %>
     <% end %>
