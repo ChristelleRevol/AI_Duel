@@ -23,6 +23,7 @@
     <% end %>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <%= render "shared/upbutton" %>
     <% unless current_page?(root_path) || controller_name == "errors"  %>
       <%= render "shared/footer" %>
     <% end %>

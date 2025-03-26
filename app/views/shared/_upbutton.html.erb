@@ -1,0 +1,16 @@
+<script>
+  document.addEventListener("turbo:load", () => {
+    const upbtn = document.getElementById("up-button");
+    upbtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      })
+    })
+  })
+</script>
+
+<div id="up-button">
+  <i class="fa-solid fa-arrow-up up-icon"></i>
+</div>
