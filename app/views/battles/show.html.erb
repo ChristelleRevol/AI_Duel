@@ -2,7 +2,7 @@
 <%# if @battle.winner.nil? %>
 
   <div class="user-prompt-and-infos">
-    <div class="user-prompt">
+    <div class="show-user-prompt">
       <%= @battle.prompt %>
     </div>
     <div>
@@ -10,7 +10,7 @@
       <% seconds_until_target_time = @battle.end_date.to_time.to_i - Time.now.to_i %>
 
       <div class="user-infos-and-timer">
-        <div class="timer user-infos"><%= content_tag(:h1, "", data: {
+        <div class="timer show-user-infos"><%= content_tag(:h1, "", data: {
           controller: "timer",
           timer_target: "timer",
           seconds_until_end_value: seconds_until_target_time
@@ -18,7 +18,7 @@
       </div>
 
       <div class="user-infos-and-timer mt-2">
-        <div class="user-infos">
+        <div class="show-user-infos">
           <% if @battle.user.photo.attached?%>
             <%= cl_image_tag @battle.user.photo.key, class: 'avatar' %>
           <% else %>
@@ -43,10 +43,10 @@
           </div>
         <% else %>
 
-          <%= link_to battle_votes_path(@battle, response_id: response.id), data: {turbo_method: :post} , class: 'response-card', remote: true do %>
-            <i class="fa-solid fa-heart heart"></i>
-            <%= render "response", response: response, battle: @battle, user: current_user, vote: @vote %>
-            <%# <div class="ftm"><%= button_to "Vote", battle_votes_path(@battle, response_id: response.id), method: :post, class: "vote-button" %>
+          <%= link_to battle_votes_path(@battle, response_id: response.id), data: {turbo_method: :post} , class: 'response-card #{"active-vote" if Vote.user_voted?(current_user, @battle)}', remote: true do %>
+            <div class="response-card-scroll">
+              <%= render "response", response: response, battle: @battle, user: current_user, vote: @vote %>
+            </div>
           <% end %>
 
         <% end %>
@@ -61,7 +61,7 @@
 
   <%= button_to "Start a new one", new_battle_path, method: :get, class: "start-button" %>
 
-  <div class="user-prompt"><%= @battle.prompt %></div>
+  <div class="show-user-prompt"><%= @battle.prompt %></div>
 
   <i class="fa-solid fa-trophy trophy"></i>
 
