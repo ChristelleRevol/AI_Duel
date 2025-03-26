@@ -23,7 +23,7 @@
     <% end %>
     <%= render "shared/flashes" %>
     <%= yield %>
-    <%= render "shared/upbutton" %>
+    <%# <%= render "shared/upbutton" %>
     <span class="spacer"></span>
     <% unless current_page?(root_path) || controller_name == "errors"  %>
       <%= render "shared/footer" %>
