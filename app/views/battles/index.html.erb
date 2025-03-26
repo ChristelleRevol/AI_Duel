@@ -12,7 +12,8 @@
 <script>
     document.addEventListener("turbo:load", function () {
         const cards = document.querySelectorAll(".prompt-card-third-row");
-        const button = document.getElementById("loadMore");
+        const buttonMore = document.getElementById("loadMore");
+        const buttonLess = document.getElementById("loadLess");
         let visibleCount = 0; // Nombre d'éléments actuellement visibles
 
         function showMoreCards() {
@@ -22,21 +23,41 @@
 
             // Cache le bouton si tous les éléments sont affichés
             if (visibleCount >= cards.length) {
-                button.style.display = "none";
+                buttonMore.style.display = "none";
             }
+
+             // Il faut afficher le bouton "Voir moins" si on revient à la valeur initiale
+            if (visibleCount > 3) {
+              buttonLess.style.display = "inline";
         }
+        }
+
+        function showLessCards() {
+        if (visibleCount > 3) {
+            let lastCards = Array.from(cards).slice(visibleCount - 3, visibleCount);
+            lastCards.forEach(card => card.classList.add("hidden"));
+            visibleCount -= 3;
+        }
+
+        // Cacher le bouton "Voir moins" si on revient à la valeur initiale
+        if (visibleCount = 3) {
+            buttonLess.style.display = "none";
+        }
+
+        // Afficher le bouton "Voir plus" si des cartes restent cachées
+        if (visibleCount < cards.length) {
+            buttonMore.style.display = "inline";
+        }
+    }
 
         // Afficher les 3 premiers éléments au chargement
         showMoreCards();
 
         // Ajouter un événement au bouton
-        button.addEventListener("click", showMoreCards);
+        buttonMore.addEventListener("click", showMoreCards);
+        buttonLess.addEventListener("click", showLessCards);
     });
 </script>
-
-
-
-
 
 
 <div class="index-container">
@@ -45,7 +66,7 @@
     <%# <div class="first-row-index"> %>
       <%# <h2 class="second-title">My stats</h2> %>
       <div class="index-first-row">
-        <div class="user-infos">
+        <div class="user-infos-index">
           <div class="user-infos-image"><%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %></div>
           <div class="infos-user-left">
               <div class="user-infos-text">
@@ -175,7 +196,10 @@
 
         </div>
 
-        <div class="button-row"><button id="loadMore" class="button-slide">Show more</button></div>
+        <div class="button-row">
+          <button id="loadLess" class="button-slide" style="display: none">Show less</button>
+          <button id="loadMore" class="button-slide">Show more</button>
+        </div>
 
       </div>
 
