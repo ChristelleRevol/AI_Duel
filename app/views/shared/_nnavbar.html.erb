@@ -8,7 +8,7 @@
     <ul class="navbar-nav">
       <li class="nav-item"><%= link_to "My Board", battles_path, class: "nav-link light-text-color #{'active' if current_page?(battles_path)}" %></li>
       <li class="nav-item"><%= link_to "Start Battle", new_battle_path, class: "nav-link light-text-color #{'active' if current_page?(new_battle_path)}" %></li>
-      <li class="nav-item"><%= link_to "In progress Battles", index_ongoing_battles_path, class: "nav-link light-text-color #{'active' if current_page?(index_ongoing_battles_path)}" %></li>
+      <li class="nav-item"><%= link_to "Oppened Battles", index_ongoing_battles_path, class: "nav-link light-text-color #{'active' if current_page?(index_ongoing_battles_path)}" %></li>
       <li class="nav-item"><%= link_to "History", history_battles_path, class: "nav-link light-text-color #{'active' if current_page?(history_battles_path)}" %></li>
     </ul>
   </div>
@@ -18,12 +18,11 @@
       <li class="nav-item"><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "nav-link light-text-color" %></li>
       <li class="nav-item pseudo-nav"><%= current_user.pseudo %></li>
    </ul>
-        <% if current_user.photo.attached?%>
-          <%= cl_image_tag current_user.photo.key, class: 'avatar' %>
-        <% else %>
-          <%= image_tag "Default_avatar.jpg", class: 'avatar' %>
-        <% end %>
-
+    <% if current_user.photo.attached?%>
+      <%= cl_image_tag current_user.photo.key, class: 'avatar' %>
+    <% else %>
+      <%= image_tag "Default_avatar.jpg", class: 'avatar' %>
+    <% end %>
    </div>
    <% end %>
 </div>
