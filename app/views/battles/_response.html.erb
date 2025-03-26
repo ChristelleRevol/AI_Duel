@@ -6,11 +6,16 @@
   <% else %>
 
     <div>
+      <div class="heart-and-model">
+        <% if Vote.user_voted?(user, battle) && !vote.nil? && response.model == vote.response.model %>
+          <p class="text-turquoize-color text-center fs-3 show-model-response"><%= vote.response.model %></p>
+        <% end %>
+        <i class="fa-solid fa-heart heart" data-response-card-target="heart"></i>
+      </div>
       <% if Vote.user_voted?(user, battle) && !vote.nil? && response.model == vote.response.model %>
-        <p class="text-turquoize-color mb-2 text-center fs-3"><%= vote.response.model %></p>
-        <p class="ms-2 text-gray-color">tokens: <%= vote.response.token %></p>
+        <p class="margin-token text-gray-color">tokens: <%= vote.response.token %></p>
       <% end %>
-      <i class="fa-solid fa-heart heart" data-response-card-target="heart"></i>
+
     </div>
 
     <div class="response-content-text-card" data-response-card-target="content">

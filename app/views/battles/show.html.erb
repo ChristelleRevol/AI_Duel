@@ -20,11 +20,11 @@
       <div class="user-infos-and-timer mt-2">
         <div class="show-user-infos">
           <% if @battle.user.photo.attached?%>
-            <%= cl_image_tag @battle.user.photo.key, class: 'avatar' %>
+            <%= cl_image_tag @battle.user.photo.key, class: 'avatar-show' %>
           <% else %>
-            <%= image_tag "Default_avatar.jpg", class: 'avatar' %>
+            <%= image_tag "Default_avatar.jpg", class: 'avatar-show' %>
           <% end %>
-            <span class="ms-3"><%= @battle.user.pseudo %></span>
+            <span class="ms-2"><%= @battle.user.pseudo %></span>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
           </div>
         <% else %>
 
-          <%= link_to battle_votes_path(@battle, response_id: response.id), data: {turbo_method: :post} , class: 'response-card #{"active-vote" if Vote.user_voted?(current_user, @battle)}', remote: true do %>
+            <%= link_to battle_votes_path(@battle, response_id: response.id), data: { turbo_method: :post }, class: "response-card #{'active-vote' if Vote.user_voted?(current_user, @battle) && response == @vote.response}" do %>
             <div class="response-card-scroll">
               <%= render "response", response: response, battle: @battle, user: current_user, vote: @vote %>
             </div>
@@ -59,9 +59,32 @@
 
   <h1 class="title-index">This battle is already over</h1>
 
-  <%= button_to "Start a new one", new_battle_path, method: :get, class: "start-button" %>
+  <%= button_to "Start a new one", new_battle_path, method: :get, class: "show-start-button" %>
+  <div class="user-prompt-and-infos">
+    <div>
+        <div class="show-user-prompt"><%= @battle.prompt %></div>
+    </div>
 
-  <div class="show-user-prompt"><%= @battle.prompt %></div>
+    <div>
+      <div class="user-infos-and-timer justify-content-between">
+        <p class="ms-3 text-gray-color">Closed</p>
+        <p class="text-gray-color me-3"><%= @votes_count %> Votes</p>
+      </div>
+
+      <div class="user-infos-and-timer mt-2">
+        <div class="show-user-infos">
+          <% if @battle.user.photo.attached?%>
+            <%= cl_image_tag @battle.user.photo.key, class: 'avatar-show' %>
+          <% else %>
+            <%= image_tag "Default_avatar.jpg", class: 'avatar-show' %>
+          <% end %>
+            <span class="ms-2"><%= @battle.user.pseudo %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
   <i class="fa-solid fa-trophy trophy"></i>
 
@@ -82,9 +105,14 @@
               </div>
             </div>
           <% else %>
-            <div class="response-card">
-              <h4><%= response.model %></h4>
-              <%= markdown_to_html(response.content) %>
+            <div class="response-card-podium">
+              <div class="response-card-scroll">
+                <p class="text-turquoize-color text-center fs-3 show-model-response"><%= response.model %></p>
+                <p class="margin-token text-gray-color">tokens: <%= response.token %></p>
+                <div class="response-content-text-card">
+                  <%= markdown_to_html(response.content) %>
+                </div>
+              </div>
             </div>
           <% end %>
 
