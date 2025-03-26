@@ -14,19 +14,17 @@
         const cards = document.querySelectorAll(".prompt-card-third-row");
         const buttonMore = document.getElementById("loadMore");
         const buttonLess = document.getElementById("loadLess");
-        let visibleCount = 0; // Nombre d'éléments actuellement visibles
+        let visibleCount = 0;
 
         function showMoreCards() {
             let nextCards = Array.from(cards).slice(visibleCount, visibleCount + 3);
             nextCards.forEach(card => card.classList.remove("hidden"));
             visibleCount += 3;
 
-            // Cache le bouton si tous les éléments sont affichés
             if (visibleCount >= cards.length) {
                 buttonMore.style.display = "none";
             }
 
-             // Il faut afficher le bouton "Voir moins" si on revient à la valeur initiale
             if (visibleCount > 3) {
               buttonLess.style.display = "inline";
         }
@@ -39,21 +37,17 @@
             visibleCount -= 3;
         }
 
-        // Cacher le bouton "Voir moins" si on revient à la valeur initiale
         if (visibleCount = 3) {
             buttonLess.style.display = "none";
         }
 
-        // Afficher le bouton "Voir plus" si des cartes restent cachées
         if (visibleCount < cards.length) {
             buttonMore.style.display = "inline";
         }
     }
 
-        // Afficher les 3 premiers éléments au chargement
         showMoreCards();
 
-        // Ajouter un événement au bouton
         buttonMore.addEventListener("click", showMoreCards);
         buttonLess.addEventListener("click", showLessCards);
     });
@@ -63,8 +57,6 @@
 <div class="index-container">
   <h1 class="title-index"> <%= "Welcome back, #{current_user.pseudo} !" %> </h1>
 
-    <%# <div class="first-row-index"> %>
-      <%# <h2 class="second-title">My stats</h2> %>
       <div class="index-first-row">
         <div class="user-infos-index">
           <div class="user-infos-image"><%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %></div>
@@ -136,11 +128,7 @@
             </div>
           </div>
       </div>
-    <%# </div> %>
 
-
-
-    <%# <div class="second-row-index"> %>
       <h2 class="second-title">My battles</h2>
         <div class="index-second-row" id="unid">
 
@@ -166,13 +154,6 @@
             <button class="button-slide" onclick="toLeft(unid, 500)"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="button-slide" onclick="toRight(unid, 500)"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
-
-    <%# </div> %>
-
-
-
-
-
 
     <div class="third-row-index">
       <h2 class="second-title">Opened battles</h2>
