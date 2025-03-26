@@ -20,4 +20,8 @@ Rails.application.routes.draw do
     resources :votes, only: %i[create]
   end
   resources :responses, only: %i[index create]
+
+  get "/about", to: "pages#about"
+  get "/legal", to: "pages#legal"
+  get "/team",  to: "pages#team"
 end
