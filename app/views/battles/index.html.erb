@@ -16,7 +16,7 @@
         const buttonLess = document.getElementById("loadLess");
         let visibleCount = 0;
 
-        function showMoreCards() {
+        function showMoreCards(shouldScroll = true) {
             let nextCards = Array.from(cards).slice(visibleCount, visibleCount + 3);
             nextCards.forEach(card => card.classList.remove("hidden"));
             visibleCount += 3;
@@ -28,6 +28,11 @@
             if (visibleCount > 3) {
               buttonLess.style.display = "inline";
         }
+
+          if (shouldScroll) {
+            window.scrollBy({ top: 240, behavior: "smooth"});
+          }
+
         }
 
         function showLessCards() {
@@ -37,16 +42,17 @@
             visibleCount -= 3;
         }
 
-        if (visibleCount = 3) {
+        if (visibleCount <= 3) {
             buttonLess.style.display = "none";
         }
 
         if (visibleCount < cards.length) {
             buttonMore.style.display = "inline";
         }
+        window.scrollBy({ top: -240, behavior: "smooth"});
     }
 
-        showMoreCards();
+        showMoreCards(false);
 
         buttonMore.addEventListener("click", showMoreCards);
         buttonLess.addEventListener("click", showLessCards);
