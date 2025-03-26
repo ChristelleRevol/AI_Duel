@@ -5,10 +5,10 @@
       <%= form_with url: history_battles_path, method: :get, local: true do %>
         <ul class="filters">
           <% filters = [
-            { key: "content generation", value: "Content generation", label: "Content", icon: "fa-solid fa-keyboard" },
-            { key: "research", value: "Research", label: "Research", icon: "fa-solid fa-magnifying-glass" },
-            { key: "discussion", value: "Discussion", label: "Discussion", icon: "fa-solid fa-comments" },
-            { key: "mathematics", value: "Mathematics", label: "Mathematics", icon: "fa-solid fa-calculator" }
+            { key: "Content", value: "Content generation", label: "Content", icon: "fa-solid fa-keyboard" },
+            { key: "Research", value: "Research", label: "Research", icon: "fa-solid fa-magnifying-glass" },
+            { key: "Discussion", value: "Discussion", label: "Discussion", icon: "fa-solid fa-comments" },
+            { key: "Mathematics", value: "Mathematics", label: "Mathematics", icon: "fa-solid fa-calculator" }
           ] %>
 
           <% filters.each do |filter| %>
