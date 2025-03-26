@@ -90,7 +90,7 @@
 
   <div class="podium">
     <div class="podium-left"><span><%= @ranking[1] %></span></div>
-    <div class="podium-middle"><span><%= @ranking.first %></span></div>
+    <div class="podium-middle"><span class="yellow-text-color"><%= @ranking.first %></span></div>
     <div class="podium-right"><span><%= @ranking.last %></span></div>
   </div>
 
@@ -106,8 +106,8 @@
             </div>
           <% else %>
             <div class="response-card-podium">
-              <div class="response-card-scroll">
-                <p class="text-turquoize-color text-center fs-3 show-model-response"><%= response.model %></p>
+              <div class="response-card-scroll"><%=  %>
+                <%= content_tag :p, response.model, class: "text-center fs-3 show-model-response #{ response.model == @ranking.first ? 'yellow-text-color' : 'text-turquoize-color' }" %>
                 <p class="margin-token text-gray-color">tokens: <%= response.token %></p>
                 <div class="response-content-text-card">
                   <%= markdown_to_html(response.content) %>
