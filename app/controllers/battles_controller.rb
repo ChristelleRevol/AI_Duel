@@ -43,6 +43,9 @@ class BattlesController < ApplicationController
     @votes_count_ranking = @responses.map { |response| response.votes.count }.sort_by { |response| -response }
 
     @ranking = @responses.sort_by { |response| -response.votes.count }.map(&:model)
+
+    @votes_count = 0
+    @responses.each { |response| @votes_count += response.votes.count }
   end
 
   def new
