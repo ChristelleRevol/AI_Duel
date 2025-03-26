@@ -10,7 +10,7 @@
         <% if Vote.user_voted?(user, battle) && !vote.nil? && response.model == vote.response.model %>
           <p class="text-turquoize-color text-center fs-3 show-model-response"><%= vote.response.model %></p>
         <% end %>
-        <i class="fa-solid fa-heart heart" data-response-card-target="heart"></i>
+        <%# <i class="fa-solid fa-heart heart" data-response-card-target="heart"></i> %>
       </div>
       <% if Vote.user_voted?(user, battle) && !vote.nil? && response.model == vote.response.model %>
         <p class="margin-token text-gray-color">tokens: <%= vote.response.token %></p>
