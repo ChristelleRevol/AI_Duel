@@ -15,6 +15,10 @@
   color: #00BDBB;
 }
 
+.light-text-color.active {
+  color: rgba(255,204,98,0.67) !important;
+}
+
 .light-text-color:hover {
   color: rgba(255,204,98,0.67);
 }
@@ -24,6 +28,7 @@
   text-decoration: none;
   display: inline-block;
   padding: 5px 10px;
+  height: 40px;
   transition: color 0.3s ease-out;
 }
 
@@ -48,7 +53,37 @@
 }
 
 .nav-link.active::after {
+  color: rgba(255,204,98,0.67);
   transform: scaleX(1);
   width: 100%;
   left: 0;
+}
+
+.nav-container {
+  display: flex;
+  width: auto;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  background: #1B1F32;
+  padding: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-avatar {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
 }

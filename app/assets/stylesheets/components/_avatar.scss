@@ -3,6 +3,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 0 20px;
 }
 .avatar-large {
   width: 56px;
@@ -36,4 +37,10 @@
   width: 170px;
   border-radius: 50%;
   // box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.pseudo {
+  padding: 5px 10px;
+  height: 40px;
+  color: #C1C1C1;
 }
