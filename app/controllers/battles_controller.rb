@@ -21,12 +21,24 @@ class BattlesController < ApplicationController
 
   def history
     @battles = Battle.where.not(winner: nil)
+
+    if params[:filters].present?
+      selected_categories = params[:filters].keys
+      @battles = @battles.where(category: selected_categories)
+    end
+
+    if params[:winners].present?
+      selected_winners = params[:winners].keys
+      @battles = @battles.where(winner: selected_winners)
+    end
+
     render "history"
   end
 
   def show
     @battle = Battle.find(params[:id])
     @responses = @battle.responses
+    @vote = Vote.find_by(user: current_user, battle: @battle)
 
     @votes_count_ranking = @responses.map { |response| response.votes.count }.sort_by { |response| -response }
 

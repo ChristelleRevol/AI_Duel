@@ -1,77 +1,64 @@
-<h1 class="title-index"><%=@battles.any? ? "All battles" : "No battle in progress "%></h1>
+<h1 class="title-index"><%=@battles.any? ? "Great history of battles" : "You've filtered too much !"%></h1>
+<div class="history-container">
+  <div class="filter-column">
+    <div class="design-filter">
+      <%= form_with url: history_battles_path, method: :get, local: true do %>
+        <ul class="filters">
+          <% filters = [
+            { key: "content generation", value: "Content generation", label: "Content", icon: "fa-solid fa-keyboard" },
+            { key: "research", value: "Research", label: "Research", icon: "fa-solid fa-magnifying-glass" },
+            { key: "discussion", value: "Discussion", label: "Discussion", icon: "fa-solid fa-comments" },
+            { key: "mathematics", value: "Mathematics", label: "Mathematics", icon: "fa-solid fa-calculator" }
+          ] %>
 
-
-<!-- Début filter -->
-<div class="perfect-filter">
-<%= form_with url: battles_path, method: :get do |form| %>
-<!-- liste pour le status -->
-  <ul class="list-group" id="items-status">
-    <li class="list-group-item">
-      <!-- Radio pour "Toutes les battles" (aucun filtre) -->
-      <div class="form-check">
-        <%= radio_button_tag "status", "", params[:status].blank?, class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_all", "All", class: "form-check-label test-form" %>
-      </div>
-      <!-- Radio pour "In Progress" (winner NULL) -->
-      <div class="form-check">
-        <%= radio_button_tag "status", "nil", params[:status] == "nil", class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_in_progress", "In Progress", class: "form-check-label" %>
-      </div>
-      <!-- Radio pour "Finished" (winner NOT NULL) -->
-      <div class="form-check">
-        <%= radio_button_tag "status", "not_nil", params[:status] == "not_nil", class: "form-check-input", onchange: "this.form.submit()" %>
-        <%= label_tag "winner_finished", "Finished", class: "form-check-label" %>
-      </div>
-    </li>
-  </ul>
-<!-- fin liste pour le status -->
-<!-- liste pour la category -->
-  <ul class="list-group" id="items-category">
-    <li class="list-group-item">
-        <% Battle.select(:category).distinct.order(:category).pluck(:category).each do |category| %>
-          <div class="form-check">
-            <%= check_box_tag "category[]", category, params[:category]&.include?(category), class: "form-check-input", onchange: "this.form.submit()" %>
-            <%= label_tag "category_#{category}", category, class: "form-check-label" %>
-          </div>
-        <% end %>
-    </li>
-  </ul>
-<!-- fin liste pour la category -->
-<!-- liste pour le status -->
-  <ul class="list-group" id="items-winner">
-    <li class="list-group-item">
-      <% Battle.where.not(winner: nil).select(:winner).distinct.order(:winner).pluck(:winner).each do |winner| %>
-        <div class="form-check">
-          <%= check_box_tag "winner[]", winner, params[:winner]&.include?(winner), class: "form-check-input", onchange: "this.form.submit()" %>
-          <%= label_tag "winner_#{winner}", winner, class: "form-check-label" %>
-        </div>
+          <% filters.each do |filter| %>
+            <li>
+              <div class="div-label">
+                <%= check_box_tag "filters[#{filter[:key]}]", "1", params.dig(:filters, filter[:key].to_s).present?, class: "filter-check", id: filter[:key].to_s, onchange: "this.form.submit()" %>
+                <label data-label="<%= filter[:label] %>" for="<%= filter[:key] %>">
+                  <i class="<%= filter[:icon] %>"></i>
+                </label>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <hr class="separator">
+        <ul class="winners">
+          <% winners = [
+            { key: :OpenAI, label: "ChatGPT", icon: "filter/openai.svg" },
+            { key: :Claude, label: "Claude", icon: "filter/claude.svg" },
+            { key: :Mistral, label: "Mistral 🇫🇷", icon: "filter/mistral.svg" }
+          ] %>
+          <% winners.each do |winner| %>
+            <li>
+              <div class="div-label">
+                <%= check_box_tag "winners[#{winner[:key]}]", "1", params.dig(:winners, winner[:key].to_s).present?, class: "filter-check", id: winner[:key].to_s, onchange: "this.form.submit()" %>
+                <label data-label="<%= winner[:label] %>" for="<%= winner[:key] %>">
+                  <%= inline_svg winner[:icon], class: "svgAI" %>
+                </label>
+              </div>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
-    </li>
-  </ul>
-<!-- fin liste pour le status -->
-  <% end %>
-</div>
-<!-- fin filter -->
-
-
-
-
-
-
-<div class="row-container">
-  <% @battles.each do |battle| %>
-    <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
-      <div class="prompt-card">
-        <div class="prompt-top"><p><%= battle.prompt %></p></div>
-
-          <div class="prompt-card-body">
-            <div class="category"><%= battle.category.capitalize %></div>
+    </div>
+  </div>
+  <div class="card-column">
+    <div class="card-row">
+      <% @battles.each do |battle| %>
+        <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
+          <div class="prompt-card">
+            <div class="prompt-top"><p><%= battle.prompt %></p></div>
+            <div class="prompt-card-body">
+              <div class="category"><%= battle.category.capitalize %></div>
               <div class="last-elements-card">
                 <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
                 <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
               </div>
+            </div>
           </div>
-      </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+  </div>
 </div>

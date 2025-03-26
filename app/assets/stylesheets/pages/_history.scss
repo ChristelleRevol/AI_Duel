@@ -1,0 +1,121 @@
+/* PAGE STYLE */
+.history-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.filter-column {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  justify-content: flex-start;
+  padding-top: 12px;
+}
+
+.design-filter {
+  width: 84px;
+  border: 1px solid #1B1F32;
+  background-color: #24293E;
+  margin: 0 auto;
+  padding: 20px 0px;
+  border-radius: 25px;
+  position: sticky;
+  top: 20px;
+  z-index: 10;
+}
+
+.card-column {
+  display: flex;
+  width: 90%;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: clamp(300px, 90vw, 1490px);
+  min-height: 230px;
+  height: auto;
+  gap: 1.5rem;
+}
+
+/* FILTER NOOOOOWWWWW */
+.filter-check {
+  position: absolute;
+  transform: scale(0);
+}
+
+.div-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 36px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li label {
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 80px;
+  height: 80px;
+  color: #00BDBB;
+  transition: 1s ease;
+}
+
+.filter-check:checked + label {
+  color: #FFCC62;
+  // transform: rotate(360deg); // special quentin
+}
+
+.filter-check:checked + label .svgAI {
+  fill: #FFCC62;
+}
+
+.svgAI {
+  fill:#00BDBB;
+}
+
+ul li label::before {
+  content: attr(data-label);
+  font-size: 16px;
+  position: absolute;
+  background-color: #00BDBB;
+  color:white;
+  text-decoration: none;
+  padding: 0.5rem 1em;
+  border-radius: 100px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.33);
+  transform: translateX(35px) rotate(-25deg);
+  opacity: 0;
+  transition: 200ms cubic-bezier(0.42, 0, .44, 1.68); // reel effect
+  // transition: 1000ms ease; // spcial quentin
+}
+
+ul li label:hover {
+  fill: #FFCC62;
+}
+
+ul li label:hover::before {
+  transform: translateX(65px) rotate(0); // reel effect
+  // transform: translateX(65px) rotate(360deg); // special quentin
+  opacity: 1;
+}
+
+.separator {
+  height: 4px;
+  border: none;
+  background-color:#00BDBB;
+}

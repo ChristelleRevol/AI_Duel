@@ -1,0 +1,19 @@
+#up-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #282D43;
+  display: flex;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.up-icon {
+  color: #00ADAB;
+  font-size: 20px;
+  text-align: center;
+}

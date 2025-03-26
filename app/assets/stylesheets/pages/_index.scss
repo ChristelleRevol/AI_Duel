@@ -11,8 +11,10 @@
 }
 
 .second-title {
-  color: #C1C1C1;
+  color: #00ADAB;
   text-align: left;
+  margin-top: 4rem;
+  margin-bottom: 0.5rem;
 }
 
 .first-row-index {
@@ -23,6 +25,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color:  #1B1F32;
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.33);
+  height: 245px;
+  width: 1410px;
+  border-radius: 10px;
+  padding: 0 3rem;
 }
 
 .index-second-row {
@@ -33,8 +41,6 @@
   scrollbar-width: none;
 }
 
-
-
 .index-second-row::-webkit-scrollbar {
   display: none;
 }
@@ -42,105 +48,131 @@
 .index-third-row {
   display: flex;
   gap: 0rem 1.5rem;
-  // overflow: hidden;
-  // scroll-snap-type: x mandatory;
   flex-wrap: wrap;
 }
 
 .index-fourth-row {
   display: flex;
-  // flex-wrap: wrap;
   gap: 1.5rem;
   overflow: hidden;
+  scroll-padding-left: 1rem;
 }
 
-.user-infos {
+.user-infos-index {
   display: flex;
 }
 
-.user-infos-text {
+.infos-user-left {
   display: flex;
   flex-direction: column;
+  align-items: baseline;
+  justify-content: space-around;
+  padding-left: 20px;
 }
 
-.icon-ai {
-  height: 120px;
-  width: 240px;
-  // border: 1px solid red;
-  position: relative;
-}
-
-.logo-ai-claude {
-  height: 45px;
-  width: 45px;
-  position:absolute;
-  left: 1px;
-  top: 1px;
-}
-
-.logo-ai-deepseek {
-  height: 45px;
-  width: 45px;
-  position:absolute;
-  left: 1px;
-  bottom: 1px;
-}
-
-.logo-ai-grok {
-  height: 45px;
-  width: 45px;
-  position:absolute;
-  right: 1px;
-  bottom: 1px;
-}
-
-.logo-ai-mistral {
-  height: 45px;
-  width: 45px;
-  position:absolute;
-  right : 1px;
-  top: 1px;
+.logo-with-name {
+  height: 80px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: #282D43;
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.33);
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 14px;
 }
 
 .logo {
-  transition: 2s ease;
+  height: 35px;
+  width: 35px;
 }
 
-.logo:hover {
-  transform: rotate(360deg);
+.ia-right {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.all-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 260px;
 }
 
 .button-new {
-height: 60px;
-width: 120px;
-color: white;
-border-radius: 10px;
-background-color: #282D43;
-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.33);
-transition: 0.3s ease;
+  height: 60px;
+  width: 160px;
+  color: white;
+  border-radius: 10px;
+  background-color: #00ADAB;
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.33);
+  transition: 0.3s ease;
+  border: none;
 }
 
 .button-new:hover {
-  outline: 1px solid rgba(255,204,98,0.67);
+  // border: 1px solid rgba(255,204,98,0.67);
   box-shadow: 0px 0px 20px 2px rgba(255,204,98,0.67);
+  background-color: #282D43;
 }
 
-
 .button-slide {
-  width: 120px;
+  width: 140px;
+  height: 35px;
   border-radius: 50px;
   color: white;
   background-color: #282D43;
-  transition: 0.1s ease;
+  transition: 0.3s ease;
+  border: none;
+  text-decoration: none;
+  line-height: 35px;
 }
 
 .button-slide:hover {
-  outline: 1px solid rgba(255,204,98,0.67);
+  // outline: 1px solid rgba(255,204,98,0.67);
   box-shadow: 0px 0px 20px 2px rgba(255,204,98,0.67);
 }
 
 .button-row {
   text-align: center;
+}
+
+.user-infos-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 250px;
+}
+
+.square-info {
+  height: 60px;
+  width: 120px;
+  // border: 1px solid red;
+  background-color: #282D43;
+  border-radius: 10px;
+  padding-left: 8px;
+  color: white;
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.33);
+  justify-content: center;
+  font-size: 14px;
+}
+
+.square-info i {
+  color:  #00ADAB;
+}
+
+.square-info-bottom {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
 }
 
 // 3ème rangée, défilement vertical
@@ -159,6 +191,7 @@ transition: 0.3s ease;
   transition: 0.3s ease;
   margin: 12px 0px 20px 0px;
   scroll-snap-align: start;
+  margin-top: 1rem;
 }
 
 .prompt-card-third-row:hover {
