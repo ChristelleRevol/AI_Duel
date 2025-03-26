@@ -43,7 +43,8 @@ csv.each do |row|
     Response.create(
       model: model,
       battle: battle,
-      content: row[model]
+      content: row[model],
+      token: rand(30..1000)
     )
   end
 end
