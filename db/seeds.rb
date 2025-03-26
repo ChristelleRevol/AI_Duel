@@ -18,8 +18,8 @@ models = ["OpenAI", "Claude", "Mistral"]
 puts "Cleaning DB..."
 Vote.destroy_all
 Response.destroy_all
-# Battle.destroy_all
-# User.destroy_all
+Battle.destroy_all
+User.destroy_all
 
 puts "Creating users..."
 20.times do
