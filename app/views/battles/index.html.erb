@@ -72,19 +72,25 @@
                 <div class="square-info">
                   <div class="square-info-title">Prompts</div>
                   <div class="square-info-bottom">
-                    <i class="fa-solid fa-terminal"></i><span>123</span>
+                    <i class="fa-solid fa-terminal"></i><span><%= current_user.battles.count %></span>
                   </div>
                 </div>
                 <div class="square-info">
                   <div class="square-info-title">Votes</div>
                   <div class="square-info-bottom">
-                    <i class="fa-solid fa-heart"></i><span>321</span>
+                    <i class="fa-solid fa-heart"></i><span><%= current_user.votes.count %></span>
                   </div>
                 </div>
                 <div class="square-info">
                   <div class="square-info-title">Votes received</div>
                   <div class="square-info-bottom">
-                    <i class="fa-solid fa-check-to-slot"></i><span>4221</span>
+
+                    <% votes = 0 %>
+                    <% current_user.battles.each do |battle| %>
+                      <% votes += battle.votes.count %>
+                    <% end %>
+
+                    <i class="fa-solid fa-check-to-slot"></i><span><%= votes %></span>
                   </div>
                 </div>
                 <div class="square-info">
@@ -138,7 +144,7 @@
       <h2 class="second-title">My battles</h2>
         <div class="index-second-row" id="unid">
 
-          <% @battles.each do |battle| %>
+          <% current_user.battles.each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>
@@ -165,7 +171,7 @@
       <h2 class="second-title">Opened battles</h2>
         <div class="index-third-row" id="itemContainer">
 
-          <% @battles.each do |battle| %>
+          <% @ongoing_battles.each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card-third-row hidden">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>
@@ -195,7 +201,7 @@
       <h2 class="second-title">History</h2>
         <div class="index-fourth-row">
 
-          <% @battles.each do |battle| %>
+          <% @past_battles.each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>

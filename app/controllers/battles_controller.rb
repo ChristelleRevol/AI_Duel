@@ -1,17 +1,8 @@
 class BattlesController < ApplicationController
   def index
     @battles = Battle.all
-    @battles = @battles.where(category: params[:category]) if params[:category].present?
-    @battles = @battles.where(winner: params[:winner]) if params[:winner].present?
-
-    if params[:status].present?
-      case params[:status]
-      when "nil"
-        @battles = @battles.where(winner: nil)
-      when "not_nil"
-        @battles = @battles.where.not(winner: nil)
-      end
-    end
+    @past_battles = Battle.where.not(winner: nil)
+    @ongoing_battles = Battle.where(winner: nil)
   end
 
   def index_ongoing
