@@ -8,8 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require 'faker'
+require 'csv'
 
-categories = ["research", "image generation", "content generation", "discussion", "mathematics"]
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'battles.csv'))
+csv = CSV.parse(csv_text, headers: true, encoding: 'UTF-8')
+
 models = ["OpenAI", "Claude", "Mistral"]
 
 puts "Cleaning DB..."
@@ -27,26 +30,20 @@ puts "Creating users..."
   )
 end
 
-puts "Creating battles..."
-User.first(5).each do |user|
-  # User.all.each do |user|
-  #   rand(1..10).times do
-  Battle.create(
-    category: categories.sample,
-    prompt: Faker::Lorem.paragraphs(number: rand(3..5)).join(" "),
+puts "Creating battles & AI responses..."
+csv.each do |row|
+  user = User.all.sample
+  battle = Battle.create(
+    prompt: row['prompt'],
+    category: row['category'],
     end_date: Faker::Time.between_dates(from: Date.today - 1, to: Date.today + 2, period: :all),
     user: user
   )
-  # end
-end
-
-puts "Creating responses..."
-Battle.all.each do |battle|
   models.each do |model|
     Response.create(
       model: model,
       battle: battle,
-      content: Faker::Lorem.paragraphs(number: rand(15..20)).join(" ")
+      content: row[model]
     )
   end
 end
