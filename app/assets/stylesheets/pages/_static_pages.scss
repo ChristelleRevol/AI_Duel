@@ -185,3 +185,11 @@
   font-weight: bold;
   color: #FFCC62;
 }
+
+div.gif-holder {
+  display: flex;
+  justify-content: center;
+  flex: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
