@@ -13,6 +13,8 @@
 .second-title {
   color: #00ADAB;
   text-align: left;
+  margin-top: 4rem;
+  margin-bottom: 0.5rem;
 }
 
 .first-row-index {
@@ -24,6 +26,7 @@
   justify-content: space-between;
   align-items: center;
   background-color:  #1B1F32;
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.33);
   height: 245px;
   width: 1410px;
   border-radius: 10px;
@@ -119,15 +122,19 @@
 }
 
 .button-slide {
-  width: 120px;
+  width: 140px;
+  height: 35px;
   border-radius: 50px;
   color: white;
   background-color: #282D43;
-  transition: 0.1s ease;
+  transition: 0.3s ease;
+  border: none;
+  text-decoration: none;
+  line-height: 35px;
 }
 
 .button-slide:hover {
-  outline: 1px solid rgba(255,204,98,0.67);
+  // outline: 1px solid rgba(255,204,98,0.67);
   box-shadow: 0px 0px 20px 2px rgba(255,204,98,0.67);
 }
 
@@ -184,6 +191,7 @@
   transition: 0.3s ease;
   margin: 12px 0px 20px 0px;
   scroll-snap-align: start;
+  margin-top: 1rem;
 }
 
 .prompt-card-third-row:hover {
