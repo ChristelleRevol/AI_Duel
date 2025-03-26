@@ -7,6 +7,16 @@ class BattlesController < ApplicationController
 
   def index_ongoing
     @battles = Battle.where(winner: nil)
+
+    if params[:filters].present?
+      selected_categories = params[:filters].keys
+      @battles = @battles.where(category: selected_categories)
+    end
+
+    if params[:winners].present?
+      selected_winners = params[:winners].keys
+      @battles = @battles.where(winner: selected_winners)
+    end
     render "index_ongoing"
   end
 
