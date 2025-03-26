@@ -4,12 +4,6 @@ class Response < ApplicationRecord
 
   validates :model, presence: true
 
-  # ICONS = ["keyboard", "magnifying-glass", "comments", "calculator"]
-
-  # CATEGORIES = ["Content generation", "Research", "Discussion", "Mathematics"]
-
-  # CAT = [["Content generation",]]
-
   CATEGORIES = {
     Content: 'keyboard',
     Research: 'magnifying-glass',
