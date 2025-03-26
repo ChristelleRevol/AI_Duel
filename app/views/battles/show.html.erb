@@ -84,14 +84,17 @@
     </div>
   </div>
 
-
+  <%# <div class="chart smaller-size mx-auto">
+    <canvas data-controller="barchart" >
+    </canvas>
+  </div> %>
 
   <i class="fa-solid fa-trophy trophy"></i>
 
   <div class="podium">
-    <div class="podium-left"><span><%= @ranking[1] %></span></div>
+  <div class="podium-left"><span><%= @ranking[1] %></span></div>
     <div class="podium-middle"><span class="yellow-text-color"><%= @ranking.first %></span></div>
-    <div class="podium-right"><span><%= @ranking.last %></span></div>
+     <div class="podium-right"><span><%= @ranking.last %></span></div>
   </div>
 
   <div class="row-container-show">
@@ -118,5 +121,6 @@
 
       <% end %>
     </div>
-
+</div></div>
+<%# </div> %>
 <% end %>
