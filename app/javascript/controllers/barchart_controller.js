@@ -1,23 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import { Chart, registerables } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import {
-	isNullOrUndef as t,
-	merge as e,
-	toFont as r,
-	resolve as a,
-	toPadding as i,
-	valueOrDefault as n,
-	callback as o,
-	isObject as l,
-	each as s,
-} from "chart.js/helpers";
-import {
-	ArcElement as v,
-	PointElement as u,
-	BarElement as c,
-	defaults as d,
-} from "chart.js";
 
 Chart.register(...registerables);
 Chart.register(ChartDataLabels);
@@ -27,36 +10,70 @@ export default class extends Controller {
 		votecount: String,
 		ranking: String,
 	};
+
 	connect() {
 		console.log("I'm in");
+
+		Chart.defaults.plugins.legend.display = false;
 
 		const labels = JSON.parse(this.rankingValue);
 		const data = JSON.parse(this.votecountValue);
 
 		new Chart(this.element, {
 			type: "bar",
-			plugins: [ChartDataLabels],
 			data: {
 				labels: labels,
 				datasets: [
 					{
 						datalabels: {
-							color: "#FFCE56",
+							labels: {
+								color: "blue",
+							},
 						},
+						label: "",
 						data: data,
 						backgroundColor: [
-							"rgb(255, 99, 132)",
-							"rgb(54, 162, 235)",
-							"rgb(255, 205, 86)",
+							"rgb(255,204,98)",
+							"rgb(0, 189, 187)",
+							"rgb(0, 133, 131)",
 						],
 						hoverOffset: 4,
 					},
 				],
 			},
 			options: {
+				scales: {
+					x: {
+						ticks: {
+							color: "rgba(27,31,50,1)",
+							font: {
+								size: 20,
+								weight: "bold",
+							},
+						},
+						grid: { color: "rgba(27,31,50,1)" },
+					},
+					y: {
+						ticks: {
+							color: "rgb(12, 14, 34)",
+							font: {
+								size: 20,
+								weight: "bold",
+							},
+						},
+						grid: { color: "rgb(12, 14, 34)" },
+					},
+				},
+				maintainAspectRatio: false, // Permet de définir une hauteur et largeur custom
 				legend: {
 					display: false, // Désactive la legend
 				},
+				tooltip: {
+					titleColor: "white", // Couleur du titre dans le tooltip
+					bodyColor: "white", // Couleur du texte du tooltip
+					backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond du tooltip
+				},
+				plugins: [ChartDataLabels],
 			},
 		});
 

@@ -84,10 +84,17 @@
     </div>
   </div>
 
-  <div class="chart smaller-size mx-auto">
-    <canvas data-controller="barchart" data-barchart-ranking-value=<%= @ranking.to_json %> data-barchart-votecount-value=<%= @votes_count_ranking.to_json %>>
-
-    </canvas>
+  <div class="chart-container">
+    <div class="charts-card">
+      <div class="bar-chart">
+        <canvas data-controller="barchart" data-barchart-ranking-value=<%= @ranking.to_json %> data-barchart-votecount-value=<%= @votes_count_ranking.to_json %>>
+        </canvas>
+      </div>
+      <div class="doughnut-chart">
+        <canvas data-controller="doughnut" data-doughnut-models-value=<%= @sorted_models.to_json %> data-doughnut-votes-value=<%= @sorted_vote_counts.to_json %>>
+        </canvas>
+      </div>
+    </div>
   </div>
 
   <div class="row-container-show">

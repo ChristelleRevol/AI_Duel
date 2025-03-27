@@ -1,0 +1,48 @@
+.charts-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centre verticalement */
+  gap: 5%;
+  background-color: #282D43;
+ /* Adapter la largeur pour mieux centrer */
+  height: 100%;
+  width: 800px;
+  border-radius: 10px;
+}
+
+.charts-card::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Prend toute la place */
+  padding: 1px; /* Épaisseur de la bordure */
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(27,31,50,1) 33%, rgba(27,31,50,0) 100%);
+  -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.bar-chart {
+  height: 250px;
+  width: 370px;
+}
+
+.doughnut-chart {
+  height: 350px;
+  width: 270px;
+  margin-top: 7%;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  height: 450px;
+  margin: 1%;
+
+}

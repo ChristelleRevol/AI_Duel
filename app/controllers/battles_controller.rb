@@ -46,6 +46,18 @@ class BattlesController < ApplicationController
 
     @votes_count = 0
     @responses.each { |response| @votes_count += response.votes.count }
+
+    @all_votes_count = {
+      "Claude" => Vote.joins(:response).where(responses: { model: "Claude" }).count,
+      "OpenAI" => Vote.joins(:response).where(responses: { model: "OpenAI" }).count,
+      "Mistral" => Vote.joins(:response).where(responses: { model: "Mistral" }).count
+    }
+    # Trier par nombre de votes décroissant
+    @sorted_votes = @all_votes_count.sort_by { |_, votes| -votes }.to_h
+    # Récupérer la liste des modèles triés par nombre de votes
+    @sorted_models = @sorted_votes.keys
+    # Récupérer la liste des votes triés
+    @sorted_vote_counts = @sorted_votes.values
   end
 
   def new
