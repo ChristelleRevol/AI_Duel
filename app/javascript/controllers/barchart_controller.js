@@ -45,11 +45,7 @@ export default class extends Controller {
 				scales: {
 					x: {
 						ticks: {
-							color: [
-								"rgb(255,204,98)",
-								"rgb(0, 189, 187)",
-								"rgb(0, 133, 131)",
-							],
+							color: "rgb(193, 193, 193)",
 							font: {
 								size: 20,
 								weight: "bold",
@@ -59,7 +55,7 @@ export default class extends Controller {
 					},
 					y: {
 						ticks: {
-							color: "rgb(12, 14, 34)",
+							color: "rgb(193, 193, 193)",
 							font: {
 								size: 20,
 								weight: "bold",
@@ -77,7 +73,18 @@ export default class extends Controller {
 					bodyColor: "white", // Couleur du texte du tooltip
 					backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond du tooltip
 				},
-				plugins: [ChartDataLabels],
+				plugins: {
+					datalabels: {
+						color: "rgba(27,31,50,1)",
+						labels: {
+							title: {
+								font: {
+									weight: "bold",
+								},
+							},
+						},
+					},
+				},
 			},
 		});
 

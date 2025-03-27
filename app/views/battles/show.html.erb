@@ -4,6 +4,17 @@
   <div class="user-prompt-and-infos">
     <div class="show-user-prompt">
       <%= @battle.prompt %>
+      <div class="show-category">
+        <% if @battle.category == "Content generation" %>
+          <i class="fa-solid fa-keyboard"></i>
+        <% elsif @battle.category == "Research" %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        <% elsif @battle.category == "Discussion" %>
+          <i class="fa-solid fa-comments"></i>
+        <% else %>
+          <i class="fa-solid fa-calculator"></i>
+        <% end %>
+      </div>
     </div>
     <div>
       <!-- Timer -->
@@ -62,7 +73,20 @@
   <%= button_to "Start a new one", new_battle_path, method: :get, class: "show-start-button" %>
   <div class="user-prompt-and-infos">
     <div>
-        <div class="show-user-prompt"><%= @battle.prompt %></div>
+        <div class="show-user-prompt">
+          <%= @battle.prompt %>
+          <div class="show-category">
+            <% if @battle.category == "Content generation" %>
+              <i class="fa-solid fa-keyboard"></i>
+            <% elsif @battle.category == "Research" %>
+              <i class="fa-solid fa-magnifying-glass"></i>
+            <% elsif @battle.category == "Discussion" %>
+              <i class="fa-solid fa-comments"></i>
+            <% else %>
+              <i class="fa-solid fa-calculator"></i>
+            <% end %>
+          </div>
+        </div>
     </div>
 
     <div>
@@ -87,11 +111,14 @@
 
   <div class="chart-container">
     <div class="charts-card">
+
       <div class="bar-chart">
+        <p class="chart-p chart-p-winner">Winner <i class="fa-solid fa-crown"></i></p>
         <canvas data-controller="barchart" data-barchart-ranking-value=<%= @ranking.to_json %> data-barchart-votecount-value=<%= @votes_count_ranking.to_json %>>
         </canvas>
       </div>
       <div class="doughnut-chart">
+        <p class="chart-p">Winning rates:</p>
         <canvas data-controller="doughnut" data-doughnut-models-value=<%= @sorted_models.to_json %> data-doughnut-votes-value=<%= @sorted_vote_counts.to_json %>>
         </canvas>
       </div>
