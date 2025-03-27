@@ -15,17 +15,17 @@ export default class extends Controller {
 		const data = [504, 496];
 
 		new Chart(this.element, {
-			type: "doughnut",
+			type: "bar",
 			data: {
 				labels: labels,
 				datasets: [
 					{
-						label: "for 1000 people",
+						// label: "for 1000 people",
 						data: data,
 						backgroundColor: [
 							"rgb(255, 99, 132)",
 							"rgb(54, 162, 235)",
-							// "rgb(255, 205, 86)",
+							"rgb(255, 205, 86)",
 						],
 						hoverOffset: 4,
 					},
