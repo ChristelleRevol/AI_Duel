@@ -40,7 +40,7 @@ class AskClaudeJob < ApplicationJob
       "response_#{response.id}",
       target: "response_#{response.id}",
       partial: "battles/response",
-      locals: { response: response, battle: battle }
+      locals: { response: response, battle: battle, user: battle.user }
     )
   end
 end
