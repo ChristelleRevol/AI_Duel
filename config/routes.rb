@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   get "/about", to: "pages#about"
   get "/legal", to: "pages#legal"
   get "/team",  to: "pages#team"
+  get "/leaderboards", to: "pages#leaderboards"
 end

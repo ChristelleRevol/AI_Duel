@@ -1,0 +1,57 @@
+.leaderboard-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 3rem 3rem;
+  text-align: center;
+  color: #f1f1f1;
+  background-color: #1B1F32;
+}
+
+.leaderboard-page h1 {
+  font-size: 2.5rem;
+  color: #FFCC62;
+}
+
+.leaderboard-page .subtitle {
+  font-style: italic;
+  color: #aaa;
+  margin-bottom: 3rem;
+}
+
+.leaderboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.leaderboard-block {
+  background-color: #24293E;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.leaderboard-block h2 {
+  margin-bottom: 1rem;
+  color: #00BDBB;
+  font-size: 1.2rem;
+}
+
+.leaderboard-list {
+  list-style: none;
+  margin: 1rem;
+  padding: 0;
+}
+
+.leaderboard-item {
+  height: 30px;
+  background-color: #00BDBB;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  color:white;
+}
+
+.leaderboard-subtitle {
+  text-align: center;
+  color: white;
+}
