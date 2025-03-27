@@ -33,8 +33,6 @@ export default class extends Controller {
 						],
 						borderColor: [
 							"rgb(255,255,255)", // Blanc (par défaut)
-							"rgb(255,255,255)",
-							"rgb(255,255,255)",
 						],
 						borderWidth: 0, // Épaisseur de la bordure (mettre 0 pour supprimer)
 						hoverOffset: 4,

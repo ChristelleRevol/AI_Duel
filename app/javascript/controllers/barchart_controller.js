@@ -48,7 +48,11 @@ export default class extends Controller {
 				scales: {
 					x: {
 						ticks: {
-							color: "rgba(27,31,50,1)",
+							color: [
+								"rgb(255,204,98)",
+								"rgb(0, 189, 187)",
+								"rgb(0, 133, 131)",
+							],
 							font: {
 								size: 20,
 								weight: "bold",
