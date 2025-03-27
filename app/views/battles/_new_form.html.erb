@@ -1,5 +1,12 @@
 <%= simple_form_for battle do |f| %>
 
+<% duration_options = {
+    '30 mins': (DateTime.now + 30.minutes),
+    '1 hour': (DateTime.now + 1.hour),
+    '2 hours': (DateTime.now + 2.hours),
+    '1 day': (DateTime.now + 1.day)
+  }
+
 <div class="container-form-new">
 
   <%= f.input :category,
@@ -23,7 +30,7 @@
               collection_wrapper_class: 'duration-wrapper',
               item_wrapper_class: 'duration-item',
               input_html: {class: 'duration-selector'},
-              collection: Response::DURATIONS %>
+              collection: duration_options %>
 
   <div class="prompt form-floating">
     <%= f.input :prompt, label: false, wrapper: false, class: "custom-height"%>
