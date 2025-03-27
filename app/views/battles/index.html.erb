@@ -150,6 +150,8 @@
       <h2 class="second-title">My battles</h2>
         <div class="index-second-row" id="unid">
 
+        <%  %>
+
           <% current_user.battles.order(created_at: :desc).each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card">
@@ -184,12 +186,12 @@
               <% end %>
           <% end %>
 
+            </div>
+              <div class="button-row">
+                <button class="button-slide" onclick="toLeft(unid, 500)"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="button-slide" onclick="toRight(unid, 500)"><i class="fa-solid fa-arrow-right"></i></button>
+              </div>
 
-        </div>
-          <div class="button-row">
-            <button class="button-slide" onclick="toLeft(unid, 500)"><i class="fa-solid fa-arrow-left"></i></button>
-            <button class="button-slide" onclick="toRight(unid, 500)"><i class="fa-solid fa-arrow-right"></i></button>
-          </div>
 
     <div class="third-row-index">
       <h2 class="second-title">Opened battles</h2>
