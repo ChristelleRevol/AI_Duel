@@ -2,4 +2,4 @@
 meta_product_name: "AI Duel"
 meta_title: "AI Duel — Make AI Models Fight For Your Vote"
 meta_description: "Submit prompts, compare responses from top AI models, and vote for the best. No labels, no bias — just raw generative battle."
-meta_image: "banner.png" # should exist in `app/assets/images/`
+meta_image: "AIDuelBanner.jpg" # should exist in `app/assets/images/`
