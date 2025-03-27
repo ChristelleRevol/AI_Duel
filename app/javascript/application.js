@@ -4,3 +4,6 @@ import "controllers";
 import "@popperjs/core";
 import "bootstrap";
 import "chart.js";
+import "chartjs-plugin-datalabels";
+import "chart.js/helpers";
+

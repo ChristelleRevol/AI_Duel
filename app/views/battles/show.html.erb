@@ -22,7 +22,7 @@
           <% if @battle.user.photo.attached?%>
             <%= cl_image_tag @battle.user.photo.key, class: 'avatar-show' %>
           <% else %>
-            <%= image_tag "Default_avatar.jpg", class: 'avatar-show' %>
+            <%= image_tag "Default_avatar.jpeg", class: 'avatar-show' %>
           <% end %>
             <span class="ms-2"><%= @battle.user.pseudo %></span>
         </div>
@@ -38,7 +38,7 @@
           <div class="response-card">
             <div class="show-error-card">
               <h5 class="error-card-text">Uh oh ... it seems like this AI won't be able to participate</h5>
-              <%= image_tag "error_529_vector" %>
+              <%= image_tag "error_529_vector.svg" %>
             </div>
           </div>
         <% else %>
@@ -76,7 +76,7 @@
           <% if @battle.user.photo.attached?%>
             <%= cl_image_tag @battle.user.photo.key, class: 'avatar-show' %>
           <% else %>
-            <%= image_tag "Default_avatar.jpg", class: 'avatar-show' %>
+            <%= image_tag "Default_avatar.jpeg", class: 'avatar-show' %>
           <% end %>
             <span class="ms-2"><%= @battle.user.pseudo %></span>
         </div>
@@ -84,17 +84,19 @@
     </div>
   </div>
 
-  <%# <div class="chart smaller-size mx-auto">
-    <canvas data-controller="barchart" >
-    </canvas>
-  </div> %>
 
-  <i class="fa-solid fa-trophy trophy"></i>
+  <div class="chart-container">
+    <div class="charts-card">
+      <div class="bar-chart">
+        <canvas data-controller="barchart" data-barchart-ranking-value=<%= @ranking.to_json %> data-barchart-votecount-value=<%= @votes_count_ranking.to_json %>>
+        </canvas>
+      </div>
+      <div class="doughnut-chart">
+        <canvas data-controller="doughnut" data-doughnut-models-value=<%= @sorted_models.to_json %> data-doughnut-votes-value=<%= @sorted_vote_counts.to_json %>>
+        </canvas>
+      </div>
+    </div>
 
-  <div class="podium">
-  <div class="podium-left"><span><%= @ranking[1] %></span></div>
-    <div class="podium-middle"><span class="yellow-text-color"><%= @ranking.first %></span></div>
-     <div class="podium-right"><span><%= @ranking.last %></span></div>
   </div>
 
   <div class="row-container-show">
@@ -104,7 +106,7 @@
             <div class="response-card">
               <div class="show-error-card">
                 <h5 class="error-card-text">Sorry, this AI couldn't participate</h5>
-                <%= image_tag "error_529_vector" %>
+                <%= image_tag "error_529_vector.svg" %>
               </div>
             </div>
           <% else %>
