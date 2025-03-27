@@ -5,8 +5,6 @@ export default class extends Controller {
 	static targets = ["timer"];
 
 	connect() {
-		console.log("conecteed!");
-
 		this.secondsUntilEnd = this.timerTarget.dataset.secondsUntilEndValue;
 
 		const now = new Date().getTime();
