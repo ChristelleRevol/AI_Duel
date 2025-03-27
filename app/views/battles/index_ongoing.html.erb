@@ -23,24 +23,6 @@
             </li>
           <% end %>
         </ul>
-        <hr class="separator">
-        <ul class="winners">
-          <% winners = [
-            { key: :OpenAI, label: "ChatGPT", icon: "filter/openai.svg" },
-            { key: :Claude, label: "Claude", icon: "filter/claude.svg" },
-            { key: :Mistral, label: "Mistral 🇫🇷", icon: "filter/mistral.svg" }
-          ] %>
-          <% winners.each do |winner| %>
-            <li>
-              <div class="div-label">
-                <%= check_box_tag "winners[#{winner[:key]}]", "1", params.dig(:winners, winner[:key].to_s).present?, class: "filter-check", id: winner[:key].to_s, onchange: "this.form.submit()" %>
-                <label data-label="<%= winner[:label] %>" for="<%= winner[:key] %>">
-                  <%= inline_svg winner[:icon], class: "svgAI" %>
-                </label>
-              </div>
-            </li>
-          <% end %>
-        </ul>
       <% end %>
     </div>
   </div>
