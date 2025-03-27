@@ -150,8 +150,7 @@
       <h2 class="second-title">My battles</h2>
         <div class="index-second-row" id="unid">
 
-        <%  %>
-
+        <% if current_user.battles.any? %>
           <% current_user.battles.order(created_at: :desc).each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card">
@@ -185,13 +184,17 @@
                 </div>
               <% end %>
           <% end %>
+        <% else %>
+          <p class="text-no-battle">You've not created any battle yet !</p>
+        <% end %>
+      </div>
 
-            </div>
+          <% if current_user.battles.count > 3 %>
               <div class="button-row">
                 <button class="button-slide" onclick="toLeft(unid, 500)"><i class="fa-solid fa-arrow-left"></i></button>
                 <button class="button-slide" onclick="toRight(unid, 500)"><i class="fa-solid fa-arrow-right"></i></button>
               </div>
-
+          <% end %>
 
     <div class="third-row-index">
       <h2 class="second-title">Opened battles</h2>
