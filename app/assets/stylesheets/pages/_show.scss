@@ -268,7 +268,7 @@
 }
 
 .text-gray-color {
-  color: #C1C1C1;
+  color: rgb(193, 193, 193);
 }
 
 .text-turquoize-color {
@@ -337,4 +337,13 @@
 .yellow-text-color {
   color: rgba(255,204,98,1);
   text-shadow: 0 0 8px rgba(255, 204, 98, 0.33);
+}
+
+.show-category {
+  position: absolute;
+  color: #00BDBB;
+  bottom: 0;
+  right: 0;
+  margin: 2% 2.5%;
+  font-size: 26px;
 }

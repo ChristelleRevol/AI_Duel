@@ -40,10 +40,36 @@ export default class extends Controller {
 				],
 			},
 			options: {
-				plugins: { legend: { display: true } },
-				maintainAspectRatio: false, // Permet de définir une hauteur et largeur custom
+				ticks: {
+					color: ["rgb(255,204,98)", "rgb(0, 189, 187)", "rgb(0, 133, 131)"],
+				},
+
+				plugins: {
+					legend: {
+						display: true,
+						labels: {
+							color: "rgb(193, 193, 193)",
+							font: {
+								weight: "bold",
+								size: 20,
+							},
+						},
+					},
+
+					// **Ajout de la configuration du plugin datalabels**
+					datalabels: {
+						color: "rgba(27,31,50,1)", // Définit la couleur du texte
+						font: {
+							weight: "bold",
+							size: 14,
+						},
+					},
+				},
+				maintainAspectRatio: false,
 			},
-			plugins: [ChartDataLabels],
+
+			plugins: {},
+			maintainAspectRatio: false, // Permet de définir une hauteur et largeur custom
 		});
 	}
 }
