@@ -5,10 +5,10 @@ class Response < ApplicationRecord
   validates :model, presence: true
 
   CATEGORIES = {
-    Content: 'keyboard',
-    Research: 'magnifying-glass',
-    Discussion: 'comments',
-    Mathematics: 'calculator'
+    keyboard: 'Content',
+    'magnifying-glass': 'Research',
+    comments: 'Discussion',
+    calculator: 'Mathematics'
   }
 
   DURATIONS = {

@@ -1,27 +1,27 @@
 class BattlesController < ApplicationController
+  before_action :set_desc_ongoing_battles, only: [:index_ongoing]
+  before_action :set_desc_past_battles, only: [:history]
+
   def index
     @battles = Battle.all
-    @battles = @battles.where(category: params[:category]) if params[:category].present?
-    @battles = @battles.where(winner: params[:winner]) if params[:winner].present?
-
-    if params[:status].present?
-      case params[:status]
-      when "nil"
-        @battles = @battles.where(winner: nil)
-      when "not_nil"
-        @battles = @battles.where.not(winner: nil)
-      end
-    end
+    @past_battles = set_desc_past_battles
+    @ongoing_battles = set_desc_ongoing_battles
   end
 
   def index_ongoing
-    @battles = Battle.where(winner: nil)
+    if params[:filters].present?
+      selected_categories = params[:filters].keys
+      @battles = @battles.where(category: selected_categories)
+    end
+
+    if params[:winners].present?
+      selected_winners = params[:winners].keys
+      @battles = @battles.where(winner: selected_winners)
+    end
     render "index_ongoing"
   end
 
   def history
-    @battles = Battle.where.not(winner: nil)
-
     if params[:filters].present?
       selected_categories = params[:filters].keys
       @battles = @battles.where(category: selected_categories)
@@ -87,5 +87,13 @@ class BattlesController < ApplicationController
     models.shuffle.each do |model|
       Response.create(model: model, battle: battle)
     end
+  end
+
+  def set_desc_past_battles
+    @battles = Battle.where.not(winner: nil).order(created_at: :desc)
+  end
+
+  def set_desc_ongoing_battles
+    @battles = Battle.where(winner: nil).order(created_at: :desc)
   end
 end

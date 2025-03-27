@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-12 col-sm-4">
-      <h2>Log in</h2>
+  <h1 class="title-index">Log in</h1>
+    <div class="container-form-new">
 
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-inputs">
@@ -16,11 +16,11 @@
           </div>
 
           <div class="form-actions">
-            <%= f.button :submit, "Log in" %>
+            <%= f.button :submit, "Log in", class: "button-new" %>
           </div>
         <% end %>
-
+        <br>
         <%= render "devise/shared/links" %>
-    </div>
+        </div>
   </div>
 </div>

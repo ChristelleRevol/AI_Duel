@@ -50,7 +50,7 @@
             buttonMore.style.display = "inline";
         }
         window.scrollBy({ top: -240, behavior: "smooth"});
-    }
+      }
 
         showMoreCards(false);
 
@@ -59,32 +59,44 @@
     });
 </script>
 
-
 <div class="index-container">
   <h1 class="title-index"> <%= "Welcome back, #{current_user.pseudo} !" %> </h1>
 
       <div class="index-first-row">
         <div class="user-infos-index">
-          <div class="user-infos-image"><%= cl_image_tag current_user.photo.key, class: 'avatar-square-large' %></div>
+          <div class="user-infos-image">
+            <%#= cl_image_tag current_user.photo.key, class: 'avatar-square-large', default_image: 'Default_avatar.jpeg' %>
+            <% if current_user.photo.key.present? %>
+              <%= cl_image_tag(current_user.photo.key, class: 'avatar-square-large') %>
+            <% else %>
+              <%= image_tag('Default_avatar.jpeg', class: 'avatar-square-large') %>
+            <% end %>
+          </div>
           <div class="infos-user-left">
               <div class="user-infos-text">
 
                 <div class="square-info">
                   <div class="square-info-title">Prompts</div>
                   <div class="square-info-bottom">
-                    <i class="fa-solid fa-terminal"></i><span>123</span>
+                    <i class="fa-solid fa-terminal"></i><span><%= current_user.battles.count %></span>
                   </div>
                 </div>
                 <div class="square-info">
                   <div class="square-info-title">Votes</div>
                   <div class="square-info-bottom">
-                    <i class="fa-solid fa-heart"></i><span>321</span>
+                    <i class="fa-solid fa-heart"></i><span><%= current_user.votes.count %></span>
                   </div>
                 </div>
                 <div class="square-info">
                   <div class="square-info-title">Votes received</div>
                   <div class="square-info-bottom">
-                    <i class="fa-solid fa-check-to-slot"></i><span>4221</span>
+
+                    <% votes = 0 %>
+                    <% current_user.battles.each do |battle| %>
+                      <% votes += battle.votes.count %>
+                    <% end %>
+
+                    <i class="fa-solid fa-check-to-slot"></i><span><%= votes %></span>
                   </div>
                 </div>
                 <div class="square-info">
@@ -138,16 +150,34 @@
       <h2 class="second-title">My battles</h2>
         <div class="index-second-row" id="unid">
 
-          <% @battles.each do |battle| %>
+          <% current_user.battles.order(created_at: :desc).each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>
 
                     <div class="prompt-card-body">
-                      <div class="category"><%= battle.category.capitalize %></div>
+                      <div class="first-elements-card">
+                        <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="battle-vote-count">
+                          <i class="fa-solid fa-check-to-slot"></i>
+                          <%= "#{battle.votes.count}" %>
+                        </div>
+                      </div>
                         <div class="last-elements-card">
-                          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                          <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                          <div class="pseudo"><%= "#{battle.user.pseudo}" %></div>
+                          <div class="status">
+                            <% status = if battle.winner %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-trophy') %><%= "#{battle.winner}" %>
+                            <% else %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-clock') %>
+                              <% seconds_until_target_time = battle.end_date.to_time.to_i - Time.now.to_i %>
+                              <%= content_tag(:p, "", data: {
+                                    controller: "timer",
+                                    timer_target: "timer",
+                                    seconds_until_end_value: seconds_until_target_time
+                                  }) %>
+                            <% end %>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -165,16 +195,34 @@
       <h2 class="second-title">Opened battles</h2>
         <div class="index-third-row" id="itemContainer">
 
-          <% @battles.each do |battle| %>
+          <% @ongoing_battles.each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card-third-row hidden">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>
 
                     <div class="prompt-card-body">
-                      <div class="category"><%= battle.category.capitalize %></div>
+                      <div class="first-elements-card">
+                        <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="battle-vote-count">
+                          <i class="fa-solid fa-check-to-slot"></i>
+                          <%= "#{battle.votes.count}" %>
+                        </div>
+                      </div>
                         <div class="last-elements-card">
-                          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                          <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                          <div class="pseudo"><%= "#{battle.user.pseudo}" %></div>
+                            <div class="status">
+                            <% status = if battle.winner %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-trophy') %><%= "#{battle.winner}" %>
+                            <% else %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-clock') %>
+                              <% seconds_until_target_time = battle.end_date.to_time.to_i - Time.now.to_i %>
+                              <%= content_tag(:p, "", data: {
+                                    controller: "timer",
+                                    timer_target: "timer",
+                                    seconds_until_end_value: seconds_until_target_time
+                                  }) %>
+                            <% end %>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -195,16 +243,34 @@
       <h2 class="second-title">History</h2>
         <div class="index-fourth-row">
 
-          <% @battles.each do |battle| %>
+          <% @past_battles.each do |battle| %>
               <%= link_to battle_path(battle), class: 'text-decoration-none' do %>
                 <div class="prompt-card">
                   <div class="prompt-top"><p><%= battle.prompt %></p></div>
 
                     <div class="prompt-card-body">
-                      <div class="category"><%= battle.category.capitalize %></div>
+                      <div class="first-elements-card">
+                        <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="battle-vote-count">
+                          <i class="fa-solid fa-check-to-slot"></i>
+                          <%= "#{battle.votes.count}" %>
+                        </div>
+                      </div>
                         <div class="last-elements-card">
-                          <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                          <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                          <div class="pseudo"><%= "#{battle.user.pseudo}" %></div>
+                          <div class="status">
+                            <% status = if battle.winner %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-trophy') %><%= "#{battle.winner}" %>
+                            <% else %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-clock') %>
+                              <% seconds_until_target_time = battle.end_date.to_time.to_i - Time.now.to_i %>
+                              <%= content_tag(:p, "", data: {
+                                    controller: "timer",
+                                    timer_target: "timer",
+                                    seconds_until_end_value: seconds_until_target_time
+                                  }) %>
+                            <% end %>
+                          </div>
                         </div>
                     </div>
                 </div>

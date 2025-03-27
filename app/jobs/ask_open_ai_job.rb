@@ -5,8 +5,9 @@ class AskOpenAiJob < ApplicationJob
     response = battle.responses.find_or_create_by(model: "OpenAI")
     begin
       if response.content.nil?
-        content = api_response(battle)["choices"][0]["message"]["content"]
-        token = api_response(battle)["usage"]["total_tokens"]
+        answer = api_response(battle)
+        content = answer["choices"][0]["message"]["content"]
+        token = answer["usage"]["total_tokens"]
         response.update(content: content)
         response.update(token: token)
       end
@@ -41,7 +42,7 @@ class AskOpenAiJob < ApplicationJob
       "response_#{response.id}",
       target: "response_#{response.id}",
       partial: "battles/response",
-      locals: { response: response, battle: battle }
+      locals: { response: response, battle: battle, user: battle.user }
     )
   end
 end

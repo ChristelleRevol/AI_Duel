@@ -12,3 +12,4 @@ pin "chart.js", to: "https://ga.jspm.io/npm:chart.js@4.2.0/dist/chart.js"
 pin "@kurkle/color", to: "@kurkle--color.js" # @0.3.4
 pin "chartjs-plugin-datalabels", to: "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.esm.js"
 pin "chart.js/helpers", to: "https://ga.jspm.io/npm:chart.js@4.4.8/helpers/helpers.js"
+

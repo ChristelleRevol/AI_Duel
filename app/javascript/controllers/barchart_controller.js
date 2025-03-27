@@ -21,10 +21,12 @@ export default class extends Controller {
 
 		new Chart(this.element, {
 			type: "bar",
+
 			data: {
 				labels: labels,
 				datasets: [
 					{
+
 						datalabels: {
 							labels: {
 								color: "blue",
@@ -36,6 +38,7 @@ export default class extends Controller {
 							"rgb(255,204,98)",
 							"rgb(0, 189, 187)",
 							"rgb(0, 133, 131)",
+
 						],
 						hoverOffset: 4,
 					},

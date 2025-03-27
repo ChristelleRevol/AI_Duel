@@ -6,10 +6,10 @@
       <%= form_with url: index_ongoing_battles_path, method: :get, local: true do %>
         <ul class="filters">
           <% filters = [
-            { key: "content generation", value: "Content generation", label: "Content", icon: "fa-solid fa-keyboard" },
-            { key: "research", value: "Research", label: "Research", icon: "fa-solid fa-magnifying-glass" },
-            { key: "discussion", value: "Discussion", label: "Discussion", icon: "fa-solid fa-comments" },
-            { key: "mathematics", value: "Mathematics", label: "Mathematics", icon: "fa-solid fa-calculator" }
+            { key: "Content", value: "Content generation", label: "Content", icon: "fa-solid fa-keyboard" },
+            { key: "Research", value: "Research", label: "Research", icon: "fa-solid fa-magnifying-glass" },
+            { key: "Discussion", value: "Discussion", label: "Discussion", icon: "fa-solid fa-comments" },
+            { key: "Mathematics", value: "Mathematics", label: "Mathematics", icon: "fa-solid fa-calculator" }
           ] %>
 
           <% filters.each do |filter| %>
@@ -18,24 +18,6 @@
                 <%= check_box_tag "filters[#{filter[:key]}]", "1", params.dig(:filters, filter[:key].to_s).present?, class: "filter-check", id: filter[:key].to_s, onchange: "this.form.submit()" %>
                 <label data-label="<%= filter[:label] %>" for="<%= filter[:key] %>">
                   <i class="<%= filter[:icon] %>"></i>
-                </label>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-        <hr class="separator">
-        <ul class="winners">
-          <% winners = [
-            { key: :OpenAI, label: "ChatGPT", icon: "filter/openai.svg" },
-            { key: :Claude, label: "Claude", icon: "filter/claude.svg" },
-            { key: :Mistral, label: "Mistral 🇫🇷", icon: "filter/mistral.svg" }
-          ] %>
-          <% winners.each do |winner| %>
-            <li>
-              <div class="div-label">
-                <%= check_box_tag "winners[#{winner[:key]}]", "1", params.dig(:winners, winner[:key].to_s).present?, class: "filter-check", id: winner[:key].to_s, onchange: "this.form.submit()" %>
-                <label data-label="<%= winner[:label] %>" for="<%= winner[:key] %>">
-                  <%= inline_svg winner[:icon], class: "svgAI" %>
                 </label>
               </div>
             </li>
@@ -51,10 +33,28 @@
           <div class="prompt-card">
             <div class="prompt-top"><p><%= battle.prompt %></p></div>
             <div class="prompt-card-body">
-              <div class="category"><%= battle.category.capitalize %></div>
+              <div class="first-elements-card">
+                        <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="battle-vote-count">
+                          <i class="fa-solid fa-check-to-slot"></i>
+                          <%= "#{battle.votes.count}" %>
+                        </div>
+                      </div>
               <div class="last-elements-card">
-                <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                <div class="pseudo"><%= "#{battle.user.pseudo}" %></div>
+                <div class="status">
+                            <% status = if battle.winner %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-trophy') %><%= "#{battle.winner}" %>
+                            <% else %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-clock') %>
+                              <% seconds_until_target_time = battle.end_date.to_time.to_i - Time.now.to_i %>
+                              <%= content_tag(:p, "", data: {
+                                    controller: "timer",
+                                    timer_target: "timer",
+                                    seconds_until_end_value: seconds_until_target_time
+                                  }) %>
+                            <% end %>
+                          </div>
               </div>
             </div>
           </div>

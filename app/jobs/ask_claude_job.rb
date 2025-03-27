@@ -5,8 +5,9 @@ class AskClaudeJob < ApplicationJob
     response = battle.responses.find_or_create_by(model: "Claude")
     begin
       if response.content.nil?
-        content = api_response(battle)['content'][0]['text']
-        token = api_response(battle)['usage']['input_tokens'] + api_response(battle)['usage']['output_tokens']
+        answer = api_response(battle)
+        content = answer['content'][0]['text']
+        token = answer['usage']['input_tokens'] + answer['usage']['output_tokens']
         response.update(content: content)
         response.update(token: token)
       end
@@ -40,7 +41,7 @@ class AskClaudeJob < ApplicationJob
       "response_#{response.id}",
       target: "response_#{response.id}",
       partial: "battles/response",
-      locals: { response: response, battle: battle }
+      locals: { response: response, battle: battle, user: battle.user }
     )
   end
 end
