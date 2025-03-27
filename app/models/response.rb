@@ -4,20 +4,12 @@ class Response < ApplicationRecord
 
   validates :model, presence: true
 
-  # CATEGORIES = {
-  #   Content: 'keyboard',
-  #   Research: 'magnifying-glass',
-  #   Discussion: 'comments',
-  #   Mathematics: 'calculator'
-  # }
-
   CATEGORIES = {
     keyboard: 'Content',
     'magnifying-glass': 'Research',
     comments: 'Discussion',
     calculator: 'Mathematics'
   }
-
 
   DURATIONS = {
     '30 mins': (DateTime.now + 30.minutes),
