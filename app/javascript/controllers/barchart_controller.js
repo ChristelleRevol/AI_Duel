@@ -1,9 +1,26 @@
 import { Controller } from "@hotwired/stimulus";
 import { Chart, registerables } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import {
+	isNullOrUndef as t,
+	merge as e,
+	toFont as r,
+	resolve as a,
+	toPadding as i,
+	valueOrDefault as n,
+	callback as o,
+	isObject as l,
+	each as s,
+} from "chart.js/helpers";
+import {
+	ArcElement as v,
+	PointElement as u,
+	BarElement as c,
+	defaults as d,
+} from "chart.js";
 
 Chart.register(...registerables);
-// Chart.register(ChartDataLabels);
+Chart.register(ChartDataLabels);
 // Connects to data-controller="barchart"
 export default class extends Controller {
 	static values = {
@@ -18,6 +35,7 @@ export default class extends Controller {
 
 		new Chart(this.element, {
 			type: "bar",
+			plugins: [ChartDataLabels],
 			data: {
 				labels: labels,
 				datasets: [
@@ -36,7 +54,6 @@ export default class extends Controller {
 				],
 			},
 			options: {
-				plugins: [ChartDataLabels],
 				legend: {
 					display: false, // Désactive la legend
 				},
