@@ -36,9 +36,29 @@ export default class extends Controller {
 		const minutes = Math.floor(
 			(secondsRemaining % secondsPerHour) / secondsPerMinute,
 		);
-		const seconds = Math.floor(secondsRemaining % secondsPerMinute);
+		// const seconds = Math.floor(secondsRemaining % secondsPerMinute);
 
-		this.timerTarget.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes`;
+		// this.timerTarget.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes`;
 		// ${seconds} seconds
+
+    let displayText = "";
+
+    // Ajouter les jours uniquement si > 0
+    if (days > 0) {
+        displayText += `${days} days`;
+    }
+
+    // Ajouter les heures
+    if (hours > 0 || displayText.length > 0) {
+        displayText += (displayText.length > 0 ? ", " : "") + `${hours} hours`;
+    }
+
+    // Ajouter les minutes
+        displayText += (displayText.length > 0 ? ", " : "") + `${minutes} minutes`;
+
+    // Toujours ajouter les secondes
+    // displayText += (displayText.length > 0 ? ", " : "") + `${seconds} seconds`;
+
+    this.timerTarget.innerHTML = displayText;
 	}
 }
