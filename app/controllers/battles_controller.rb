@@ -1,13 +1,14 @@
 class BattlesController < ApplicationController
+  before_action :set_desc_ongoing_battles, only: [:index_ongoing]
+  before_action :set_desc_past_battles, only: [:history]
+
   def index
     @battles = Battle.all
-    @past_battles = Battle.where.not(winner: nil)
-    @ongoing_battles = Battle.where(winner: nil)
+    @past_battles = set_desc_past_battles
+    @ongoing_battles = set_desc_ongoing_battles
   end
 
   def index_ongoing
-    @battles = Battle.where(winner: nil)
-
     if params[:filters].present?
       selected_categories = params[:filters].keys
       @battles = @battles.where(category: selected_categories)
@@ -21,8 +22,6 @@ class BattlesController < ApplicationController
   end
 
   def history
-    @battles = Battle.where.not(winner: nil)
-
     if params[:filters].present?
       selected_categories = params[:filters].keys
       @battles = @battles.where(category: selected_categories)
@@ -47,6 +46,18 @@ class BattlesController < ApplicationController
 
     @votes_count = 0
     @responses.each { |response| @votes_count += response.votes.count }
+
+    @all_votes_count = {
+      "Claude" => Vote.joins(:response).where(responses: { model: "Claude" }).count,
+      "OpenAI" => Vote.joins(:response).where(responses: { model: "OpenAI" }).count,
+      "Mistral" => Vote.joins(:response).where(responses: { model: "Mistral" }).count
+    }
+    # Trier par nombre de votes décroissant
+    @sorted_votes = @all_votes_count.sort_by { |_, votes| -votes }.to_h
+    # Récupérer la liste des modèles triés par nombre de votes
+    @sorted_models = @sorted_votes.keys
+    # Récupérer la liste des votes triés
+    @sorted_vote_counts = @sorted_votes.values
   end
 
   def new
@@ -76,5 +87,13 @@ class BattlesController < ApplicationController
     models.shuffle.each do |model|
       Response.create(model: model, battle: battle)
     end
+  end
+
+  def set_desc_past_battles
+    @battles = Battle.where.not(winner: nil).order(created_at: :desc)
+  end
+
+  def set_desc_ongoing_battles
+    @battles = Battle.where(winner: nil).order(created_at: :desc)
   end
 end

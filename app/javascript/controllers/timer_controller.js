@@ -5,8 +5,6 @@ export default class extends Controller {
 	static targets = ["timer"];
 
 	connect() {
-		console.log("conecteed!");
-
 		this.secondsUntilEnd = this.timerTarget.dataset.secondsUntilEndValue;
 
 		const now = new Date().getTime();
@@ -25,39 +23,23 @@ export default class extends Controller {
 			return;
 		}
 
-		const secondsPerDay = 86400;
 		const secondsPerHour = 3600;
 		const secondsPerMinute = 60;
 
-		const days = Math.floor(secondsRemaining / secondsPerDay);
 		const hours = Math.floor(
-			(secondsRemaining % secondsPerDay) / secondsPerHour,
+			secondsRemaining / secondsPerHour,
 		);
 		const minutes = Math.floor(
 			(secondsRemaining % secondsPerHour) / secondsPerMinute,
 		);
-		// const seconds = Math.floor(secondsRemaining % secondsPerMinute);
-
-		// this.timerTarget.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes`;
-		// ${seconds} seconds
 
     let displayText = "";
 
-    // Ajouter les jours uniquement si > 0
-    if (days > 0) {
-        displayText += `${days} days`;
-    }
-
-    // Ajouter les heures
     if (hours > 0 || displayText.length > 0) {
-        displayText += (displayText.length > 0 ? ", " : "") + `${hours} hours`;
+        displayText += `${hours > 0 ? ` ${hours}` : ''} ${hours === 1 ? 'hour' : 'hours'}`;
     }
 
-    // Ajouter les minutes
-        displayText += (displayText.length > 0 ? ", " : "") + `${minutes} minutes`;
-
-    // Toujours ajouter les secondes
-    // displayText += (displayText.length > 0 ? ", " : "") + `${seconds} seconds`;
+        displayText += (displayText.length > 0 ? " " : "") + `${minutes > 0 ? ` ${minutes}` : ''} ${minutes === 1 ? 'minute' : 'minutes'}`;
 
     this.timerTarget.innerHTML = displayText;
 	}

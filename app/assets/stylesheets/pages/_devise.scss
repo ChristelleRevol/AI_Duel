@@ -1,0 +1,44 @@
+.custom-hint {
+  color: #C1C1C1;
+}
+
+.devise-links {
+  position:relative;
+  color: #00ADAB;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.devise-links:hover {
+  color: rgba(255, 204, 98, 0.67);
+}
+
+.devise-links::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-out, width 0.3s ease-out, left 0.3s ease-out;
+  box-shadow: 0px 0px 20px 2px rgba(255, 204, 98, 0.67);
+}
+
+.devise-links:hover::after {
+  transform: scaleX(1);
+  width: 100%;
+  left: 0;
+}
+
+.invalid-feedback {
+  color: #FFCC62;
+  border-color: #FFCC62;
+}
+
+.is-invalid {
+  color: #FFCC62;
+  border: 2px solid #FFCC62 !important;
+}

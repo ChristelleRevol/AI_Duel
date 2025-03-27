@@ -8,7 +8,7 @@
     <ul class="navbar-nav">
       <li class="nav-item"><%= link_to "My Board", battles_path, class: "nav-link light-text-color #{'active' if current_page?(battles_path)}" %></li>
       <li class="nav-item"><%= link_to "Start Battle", new_battle_path, class: "nav-link light-text-color #{'active' if current_page?(new_battle_path)}" %></li>
-      <li class="nav-item"><%= link_to "Oppened Battles", index_ongoing_battles_path, class: "nav-link light-text-color #{'active' if current_page?(index_ongoing_battles_path)}" %></li>
+      <li class="nav-item"><%= link_to "Opened Battles", index_ongoing_battles_path, class: "nav-link light-text-color #{'active' if current_page?(index_ongoing_battles_path)}" %></li>
       <li class="nav-item"><%= link_to "History", history_battles_path, class: "nav-link light-text-color #{'active' if current_page?(history_battles_path)}" %></li>
     </ul>
   </div>
