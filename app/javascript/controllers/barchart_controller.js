@@ -66,7 +66,7 @@ export default class extends Controller {
 				},
 				maintainAspectRatio: false, // Permet de définir une hauteur et largeur custom
 				legend: {
-					display: false, // Désactive la legend
+					display: false,
 				},
 				tooltip: {
 					titleColor: "white", // Couleur du titre dans le tooltip
