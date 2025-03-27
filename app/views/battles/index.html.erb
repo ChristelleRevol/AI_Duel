@@ -189,6 +189,7 @@
                           <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
                           <% seconds_until_target_time = battle.end_date.to_time.to_i - Time.now.to_i %>
                           <div class="status">
+                          <i class="fa-solid fa-clock"></i>
                             <%= content_tag(:p, "", data: {
                               controller: "timer",
                               timer_target: "timer",
@@ -224,7 +225,7 @@
                       <div class="category"><%= battle.category.capitalize %></div>
                         <div class="last-elements-card">
                           <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                          <div class="status">Ended at: <%= battle.end_date %></div>
+                          <div class="status">Winner: <%= battle.winner %></div>
                         </div>
                     </div>
                 </div>
