@@ -23,7 +23,7 @@
     <% end %>
     <%= render "shared/flashes" %>
     <%= yield %>
-    <% unless current_page?(root_path) || controller_name == "errors"  %>
+    <% unless current_page?(root_path) || current_page?(new_battle_path) || controller_name == "errors"  %>
       <%= render "shared/upbutton" %>
     <% end %>
     <span class="spacer"></span>

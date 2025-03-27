@@ -51,10 +51,28 @@
           <div class="prompt-card">
             <div class="prompt-top"><p><%= battle.prompt %></p></div>
             <div class="prompt-card-body">
-              <div class="category"><%= battle.category.capitalize %></div>
+              <div class="first-elements-card">
+                        <div class="category"><%= battle.category.capitalize %></div>
+                        <div class="battle-vote-count">
+                          <i class="fa-solid fa-check-to-slot"></i>
+                          <%= "#{battle.votes.count}" %>
+                        </div>
+                      </div>
               <div class="last-elements-card">
-                <div class="pseudo"><%= "Prompted by: #{battle.user.pseudo}" %></div>
-                <div class="status"><%= status = battle.winner ? "Closed" : "In Progress" %></div>
+                <div class="pseudo"><%= "#{battle.user.pseudo}" %></div>
+                <div class="status">
+                            <% status = if battle.winner %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-trophy') %><%= "#{battle.winner}" %>
+                            <% else %>
+                              <%= content_tag(:i, '', class: 'fa-solid fa-clock') %>
+                              <% seconds_until_target_time = battle.end_date.to_time.to_i - Time.now.to_i %>
+                              <%= content_tag(:p, "", data: {
+                                    controller: "timer",
+                                    timer_target: "timer",
+                                    seconds_until_end_value: seconds_until_target_time
+                                  }) %>
+                            <% end %>
+                          </div>
               </div>
             </div>
           </div>

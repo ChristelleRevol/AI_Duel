@@ -54,7 +54,39 @@
   display: flex;
   justify-content: space-between;
   color: #C1C1C1;
-  margin-top: 10px;
+  margin-top: 6px;
+  align-items: start;
+}
+
+.first-elements-card {
+  display: flex;
+  justify-content: space-between;
+  color: #C1C1C1;
+  align-items: start;
+}
+
+.first-elements-card i {
+  color: #00ADAB;
+  margin-right: 4px;
+}
+
+.last-elements-card .fa-clock {
+  color: #00ADAB;
+}
+
+.last-elements-card .fa-trophy {
+  color: rgba(255,204,98,0.67);
+}
+
+.last-elements-card .fa-trophy:hover {
+  color: rgb(255, 230, 50);
+}
+
+.status {
+  display: flex;
+  justify-content: right;
+  gap: 8px;
+  align-items: baseline;
 }
 
 .test-form {
