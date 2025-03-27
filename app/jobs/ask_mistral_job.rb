@@ -5,8 +5,9 @@ class AskMistralJob < ApplicationJob
     response = battle.responses.find_or_create_by(model: "Mistral")
     begin
       if response.content.nil?
-        content = api_response(battle)['choices'][0]['message']['content']
-        token = api_response(battle)['usage']['total_tokens']
+        answer = api_response(battle)
+        content = answer['choices'][0]['message']['content']
+        token = answer['usage']['total_tokens']
         response.update(content: content)
         response.update(token: token)
       end
