@@ -22,7 +22,7 @@
           <% if @battle.user.photo.attached?%>
             <%= cl_image_tag @battle.user.photo.key, class: 'avatar-show' %>
           <% else %>
-            <%= image_tag "Default_avatar.jpg", class: 'avatar-show' %>
+            <%= image_tag "Default_avatar.jpeg", class: 'avatar-show' %>
           <% end %>
             <span class="ms-2"><%= @battle.user.pseudo %></span>
         </div>
@@ -76,7 +76,7 @@
           <% if @battle.user.photo.attached?%>
             <%= cl_image_tag @battle.user.photo.key, class: 'avatar-show' %>
           <% else %>
-            <%= image_tag "Default_avatar.jpg", class: 'avatar-show' %>
+            <%= image_tag "Default_avatar.jpeg", class: 'avatar-show' %>
           <% end %>
             <span class="ms-2"><%= @battle.user.pseudo %></span>
         </div>
@@ -84,15 +84,11 @@
     </div>
   </div>
 
-
-
-  <i class="fa-solid fa-trophy trophy"></i>
-
-  <div class="podium">
-    <div class="podium-left"><span><%= @ranking[1] %></span></div>
-    <div class="podium-middle"><span class="yellow-text-color"><%= @ranking.first %></span></div>
-    <div class="podium-right"><span><%= @ranking.last %></span></div>
-  </div>
+        <div class="chart smaller-size mx-auto">
+          <canvas data-controller="barchart" data-barchart-ranking-value=<%= @ranking.to_json %> data-barchart-votecount-value=<%= @votes_count_ranking.to_json %>>
+            <!-- TODO: Display doughnut chart below -->
+          </canvas>
+        </div>
 
   <div class="row-container-show">
       <% @responses.each do |response| %>
